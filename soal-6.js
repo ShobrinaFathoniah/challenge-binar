@@ -3,6 +3,7 @@ const getAngkaTerbesarKedua = dataNumber => {
         dataNumber = dataNumber.sort((a, b) => {
             return a-b
         }).reverse()
+        
         dataNumber = [...new Set(dataNumber)]
         
         return dataNumber[1]

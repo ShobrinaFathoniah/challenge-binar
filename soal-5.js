@@ -1,7 +1,7 @@
-const name = /[A-Za-z]/
+const nameValidated = /[a-zA-Z]+/g
 
 const getSplitName = (personName) => {
-    if(name.test(personName)){
+    if(nameValidated.test(personName)){
         personName = personName.split(" ")
         const nama1 = personName[0]
         const nama2 = personName[1]

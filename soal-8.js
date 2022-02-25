@@ -85,13 +85,14 @@ const getInfoPenjualan = dataPenjualan => {
       return obj.totalTerjual === terjualTertingi
     })
   
-    const totalPersentase = Math.round((totalKeuntungan / (totalModal+totalKeuntungan)) * 100)
+    const totalPersentase = ((totalKeuntungan / totalModal) * 100).toFixed(2)
     const namaBuku = bukuTerlaris[0]["namaBuku"]
     const namaPenulis = bukuTerlaris[0]["namaPenulis"]
     const totKeuntungan = Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR"
     }).format(totalKeuntungan).split(",")[0]
+    
     const totModal = Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR"

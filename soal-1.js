@@ -1,5 +1,6 @@
 const changeWord = (selectedText, changedText, text) => {
-    return text.replace(selectedText,changedText)
+    const mengubahKata = text.replace(selectedText,changedText)
+    return mengubahKata
 }
 
 const kalimat1 = "Andini sangat mencintai kamu selamanya"

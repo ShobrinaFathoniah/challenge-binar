@@ -26,16 +26,19 @@ const dataPenjualanPakAldi = [
 ]
 
 const getTotalPenjualan = dataPenjualan => {
-        if (typeof(dataPenjualan) === "object") {
-            let result = 0;
-            for(let i = 0; i < dataPenjualan.length; i++){
-                const total = dataPenjualan[i].totalTerjual
-                result = result + total
-            }
-            return result
-        }else{
-            return "ERROR: Invalid Data Type"
+    if (typeof(dataPenjualan) === "object") {
+        let result = 0;
+
+        for(let i = 0; i < dataPenjualan.length; i++){
+            const terjual = dataPenjualan[i].totalTerjual
+                
+            result = result + terjual
         }
+
+        return result
+    }else{
+        return "ERROR: Invalid Data Type"
+    }
 }
 
 console.log(getTotalPenjualan(dataPenjualanPakAldi));
