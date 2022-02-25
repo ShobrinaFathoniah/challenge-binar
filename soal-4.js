@@ -1,26 +1,22 @@
 const hurufBesar = /[A-Z]/
 const hurufKecil = /[a-z]/
 const angka = /[0-9]/
-//?=.*
 
 const isValidPassword = (givenPassword) => {
     if (typeof(givenPassword) === "string") {
         if (givenPassword.length < 8) {
-            return false //+ " jumlah password kurang, yaitu hanya " + givenPassword.length
-        } 
-        if(hurufBesar.test(givenPassword) === false){
-            return false //+ " ga ada huruf besar " + hurufBesar.test(givenPassword)
-        } 
-        if(hurufKecil.test(givenPassword) === false){
-            return false //+ " gada huruf kecil " + hurufKecil.test(givenPassword)
-        } 
-        if(angka.test(givenPassword) === false){
-            return false //+ " ga ada angka " + angka.test(givenPassword)
+            return false //+ ", karena jumlah password kurang, yaitu hanya " + givenPassword.length
+        } else if(hurufBesar.test(givenPassword) === false){
+            return false //+ ", karena tidak ada huruf besar"
+        } else if(hurufKecil.test(givenPassword) === false){
+            return false //+ ", karena tidak ada huruf kecil"
+        } else if(angka.test(givenPassword) === false){
+            return false //+ ", karena tidak ada angka"
         } else{
             return true
         }
     } else {
-        return "ERROR: Password yang Anda buat Tidak Sah karena " 
+        return "ERROR: Invalid Type Data" 
     }
 }
 

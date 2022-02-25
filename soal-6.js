@@ -1,8 +1,8 @@
 const getAngkaTerbesarKedua = dataNumber => {
     if(typeof(dataNumber) === "object"){
         dataNumber = dataNumber.sort((a, b) => {
-            return a-b
-        }).reverse()
+            return b-a
+        })
         
         dataNumber = [...new Set(dataNumber)]
         

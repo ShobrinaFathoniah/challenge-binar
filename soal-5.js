@@ -1,13 +1,14 @@
-const nameValidated = /[a-zA-Z]+/g
+const nameValidated = /[a-zA-Z]+/
 
 const getSplitName = (personName) => {
-    if(nameValidated.test(personName)){
-        personName = personName.split(" ")
-        const nama1 = personName[0]
-        const nama2 = personName[1]
-        const nama3 = personName[2]
+    if(nameValidated.test(personName) && personName){
+        const splitName = personName.split(" ")
+
+        const nama1 = splitName[0]
+        const nama2 = splitName[1]
+        const nama3 = splitName[2]
         
-        if(personName.length === 3){
+        if(splitName.length === 3){
             const bagianNama = {
                 firstName: nama1,
                 middleName: nama2,
@@ -15,7 +16,7 @@ const getSplitName = (personName) => {
             }
     
             return bagianNama
-        } else if(personName.length === 2){
+        } else if(splitName.length === 2){
             const bagianNama = {
                 firstName: nama1,
                 middleName: null,
@@ -23,7 +24,7 @@ const getSplitName = (personName) => {
             }
     
             return bagianNama
-        } else if(personName.length === 1){
+        } else if(splitName.length === 1){
             const bagianNama = {
                 firstName: nama1,
                 middleName: null,
