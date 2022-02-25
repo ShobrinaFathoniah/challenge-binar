@@ -6,11 +6,11 @@ const isValidPassword = (givenPassword) => {
     if (typeof(givenPassword) === "string") {
         if (givenPassword.length < 8) {
             return false //+ ", karena jumlah password kurang, yaitu hanya " + givenPassword.length
-        } else if(hurufBesar.test(givenPassword) === false){
+        } else if(!hurufBesar.test(givenPassword)){
             return false //+ ", karena tidak ada huruf besar"
-        } else if(hurufKecil.test(givenPassword) === false){
+        } else if(!hurufKecil.test(givenPassword)){
             return false //+ ", karena tidak ada huruf kecil"
-        } else if(angka.test(givenPassword) === false){
+        } else if(!angka.test(givenPassword)){
             return false //+ ", karena tidak ada angka"
         } else{
             return true
