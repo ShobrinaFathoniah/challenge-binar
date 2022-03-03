@@ -2,10 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react'
-import Home from '../pages/Home';
-import Splash from '../pages/Splash';
-import DaftarMobil from '../pages/DaftarMobil';
-import Akun from '../pages/Akun';
+import { Home, Splash, DaftarMobil, Akun } from '../pages';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
