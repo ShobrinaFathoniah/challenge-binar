@@ -1,5 +1,5 @@
 import { ImageBackground, StyleSheet } from 'react-native'
-import SplashImage from '../../assets'
+import SplashImage from '../../assets/image/Splash.png'
 import React, { useEffect } from 'react'
 
 const Splash = ({ navigation }) => {
