@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet } from 'react-native'
+import { ImageBackground, StyleSheet, Dimensions } from 'react-native'
 import SplashImage from '../../assets/image/Splash.png'
 import React, { useEffect } from 'react'
 
@@ -17,9 +17,12 @@ const Splash = ({ navigation }) => {
 
 export default Splash
 
+const windowsWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
   background: {
     flex: 1,
+    width: windowsWidth,
     alignItems: 'center',
     justifyContent: 'center'
   }
