@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, StatusBar } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Home, Splash, DaftarMobil, Akun } from '../pages';
@@ -11,9 +11,9 @@ const Tab = createBottomTabNavigator();
 const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="DaftarMobil" component={DaftarMobil} />
-        <Tab.Screen name="Akun" component={Akun} />
+        <Tab.Screen name="Home" component={Home} options={{ headerShown: false}}  />
+        <Tab.Screen name="DaftarMobil" component={DaftarMobil} options={{ headerShown: false}} />
+        <Tab.Screen name="Akun" component={Akun} options={{ headerShown: false}} />
     </Tab.Navigator>
   )
 }
