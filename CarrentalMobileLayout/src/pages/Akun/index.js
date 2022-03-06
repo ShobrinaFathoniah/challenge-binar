@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
 import { HIJAU, HITAM, PUTIH } from '../../utils/constant'
 import { NotRegistered } from '../../assets'
+import React from 'react'
 
 const Akun = () => {
   return (

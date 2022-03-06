@@ -1,4 +1,5 @@
 import BottomNavigator from "./BottomNavigator";
-import Card from './Card'
+import CarCard from './CarCard'
+import Menu from "./Menu";
 
-export {BottomNavigator}
+export { BottomNavigator, CarCard, Menu }

@@ -1,15 +1,15 @@
 import { StyleSheet, Text, View , ImageBackground, Dimensions, Image, StatusBar, ScrollView } from 'react-native'
+import { Banner, Background, Profile, IconTruck, IconBox, IconCamera, IconKey, Mobil } from '../../assets'
+import { ABU, BIRU_MUDA, HIJAU, HITAM, PUTIH } from '../../utils/constant'
+import { CarCard, Menu } from '../../components'
 import React from 'react'
-import { Banner, Background, Profile, IconTruck, IconBox, IconCamera, IconKey, Kotak, Mobil } from '../../assets'
-import { ABU, BIRU_MUDA, HIJAU, HITAM, NEUTRAL, PUTIH } from '../../utils/constant'
-import Feather from 'react-native-vector-icons/Feather'
 
 const Home = () => {
   return (
     <View style={styles.page}>
       <StatusBar backgroundColor={BIRU_MUDA} />
 
-
+      {/* header */}
       <ImageBackground source={Background} style={styles.header}>
         <Text style={styles.textNama}>Hi, Nama</Text>
         
@@ -21,126 +21,22 @@ const Home = () => {
         <Image source={Banner} style={styles.banner} />
       </ImageBackground>
 
-
+      {/* Menu */}
       <View style={styles.menuAll}>
-        <View style={styles.menuSet}>
-          <ImageBackground source={Kotak} style={styles.menu}>
-            <Image source={IconTruck} style={styles.icon} />
-          </ImageBackground>
-          <Text style={styles.menuName}>Sewa Mobil</Text>
-        </View>
-        <View style={styles.menuSet}>
-          <ImageBackground source={Kotak} style={styles.menu}>
-            <Image source={IconBox} style={styles.icon} />
-          </ImageBackground>
-          <Text style={styles.menuName}>Oleh-Oleh</Text>
-        </View>
-        <View style={styles.menuSet}>
-          <ImageBackground source={Kotak} style={styles.menu}>
-            <Image source={IconKey} style={styles.icon} />
-          </ImageBackground>
-          <Text style={styles.menuName}>Penginapan</Text>
-        </View>
-        <View style={styles.menuSet}>
-          <ImageBackground source={Kotak} style={styles.menu}>
-            <Image source={IconCamera} style={styles.icon} />
-          </ImageBackground>
-          <Text style={styles.menuName}>Wisata</Text>
-        </View>
+        <Menu icon={IconTruck} name="Sewa Mobil" />
+        <Menu icon={IconBox} name="Oleh-Oleh" />
+        <Menu icon={IconKey} name="Penginapan" />
+        <Menu icon={IconCamera} name="Wisata" />
       </View>
       
-
+      {/* List Mobil */}
       <ScrollView style={styles.listPage}>
         <Text style={styles.textJudul}>Daftar Mobil Pilihan</Text>
         <View style={styles.listMobil}>
-          <View style={styles.card}>
-            <View style={{flexDirection: 'row'}}>
-              <Image source={Mobil} style={{marginTop: 7}} />
-              <View style={styles.mobilInfo}>
-                <Text style={styles.mobilName}>Daihatsu Xenia</Text>
-
-                <View style={{flexDirection: 'row'}}>
-                  <View style={styles.mobilInfo1}>
-                    <Feather name="users" color={NEUTRAL} size={12}/>
-                    <Text style={styles.number}>4</Text>
-                  </View>
-                  <View style={styles.mobilInfo1}>
-                    <Feather style={{marginStart: 14}} name='briefcase' color={NEUTRAL} size={12} />
-                    <Text style={styles.number}>2</Text>
-                  </View>
-                </View>
-
-                <Text style={styles.harga}>Rp 230.000</Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.card}>
-            <View style={{flexDirection: 'row'}}>
-              <Image source={Mobil} style={{marginTop: 7}} />
-              <View style={styles.mobilInfo}>
-                <Text style={styles.mobilName}>Daihatsu Xenia</Text>
-
-                <View style={{flexDirection: 'row'}}>
-                  <View style={styles.mobilInfo1}>
-                    <Feather name="users" color={NEUTRAL} size={12}/>
-                    <Text style={styles.number}>4</Text>
-                  </View>
-                  <View style={styles.mobilInfo1}>
-                    <Feather style={{marginStart: 14}} name='briefcase' color={NEUTRAL} size={12} />
-                    <Text style={styles.number}>2</Text>
-                  </View>
-                </View>
-
-                <Text style={styles.harga}>Rp 230.000</Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.card}>
-            <View style={{flexDirection: 'row'}}>
-              <Image source={Mobil} style={{marginTop: 7}} />
-              <View style={styles.mobilInfo}>
-                <Text style={styles.mobilName}>Daihatsu Xenia</Text>
-
-                <View style={{flexDirection: 'row'}}>
-                  <View style={styles.mobilInfo1}>
-                    <Feather name="users" color={NEUTRAL} size={12}/>
-                    <Text style={styles.number}>4</Text>
-                  </View>
-                  <View style={styles.mobilInfo1}>
-                    <Feather style={{marginStart: 14}} name='briefcase' color={NEUTRAL} size={12} />
-                    <Text style={styles.number}>2</Text>
-                  </View>
-                </View>
-
-                <Text style={styles.harga}>Rp 230.000</Text>
-              </View>
-            </View>
-          </View>
-
-          <View style={styles.card}>
-            <View style={{flexDirection: 'row'}}>
-              <Image source={Mobil} style={{marginTop: 7}} />
-              <View style={styles.mobilInfo}>
-                <Text style={styles.mobilName}>Daihatsu Xenia</Text>
-
-                <View style={{flexDirection: 'row'}}>
-                  <View style={styles.mobilInfo1}>
-                    <Feather name="users" color={NEUTRAL} size={12}/>
-                    <Text style={styles.number}>4</Text>
-                  </View>
-                  <View style={styles.mobilInfo1}>
-                    <Feather style={{marginStart: 14}} name='briefcase' color={NEUTRAL} size={12} />
-                    <Text style={styles.number}>2</Text>
-                  </View>
-                </View>
-
-                <Text style={styles.harga}>Rp 230.000</Text>
-              </View>
-            </View>
-          </View>
-
+          <CarCard name="Daihatsu Xenia" people={4} storage={2} price="Rp 230.000" pic={Mobil} />
+          <CarCard name="Daihatsu Xenia" people={4} storage={2} price="Rp 230.000" pic={Mobil} />
+          <CarCard name="Daihatsu Xenia" people={4} storage={2} price="Rp 230.000" pic={Mobil} />
+          <CarCard name="Daihatsu Xenia" people={4} storage={2} price="Rp 230.000" pic={Mobil} />
         </View>
         
       </ScrollView>
@@ -150,14 +46,14 @@ const Home = () => {
 
 export default Home
 
-const windowsWidth = Dimensions.get('window').width;
+const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   page: {
     flex: 1
   },
   header: {
-    width: windowsWidth,
+    width: windowWidth,
     height: 176
   },
   profile:{
@@ -190,23 +86,6 @@ const styles = StyleSheet.create({
     marginTop: 100,
     flexDirection: 'row',
     justifyContent: 'space-evenly'
-  },
-  menu: {
-    height: 56,
-    width: 56,
-    alignItems: 'center',
-    justifyContent:'center'
-  },
-  icon: {
-    width: 24,
-    height: 24,
-  },
-  menuName: {
-    fontSize: 13
-  },
-  menuSet: {
-    alignItems: 'center',
-    justifyContent:'center'
   },
   listPage: {
     marginTop: 25,
