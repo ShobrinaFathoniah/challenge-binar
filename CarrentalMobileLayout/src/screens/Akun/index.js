@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import { HIJAU, HITAM, PUTIH } from '../../utils/constant'
-import { NotRegistered } from '../../assets'
-import React from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { HIJAU, HITAM, PUTIH } from '../../utils/constant';
+import { NotRegistered } from '../../assets';
+import React from 'react';
 
 const Akun = () => {
   return (
@@ -9,18 +9,20 @@ const Akun = () => {
       <Text style={styles.textJudul}>Akun</Text>
 
       <View style={styles.contentContainer}>
-        <Image source={NotRegistered} style={styles.image}/>
-        <Text style={styles.text}>Upss kamu belum memiliki akun. Mulai buat akun agar transaksi di BCR lebih mudah</Text>
+        <Image source={NotRegistered} style={styles.image} />
+        <Text style={styles.text}>
+          Upss kamu belum memiliki akun. Mulai buat akun agar transaksi di BCR
+          lebih mudah
+        </Text>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
       </View>
-      
     </View>
-  )
-}
+  );
+};
 
-export default Akun
+export default Akun;
 
 const styles = StyleSheet.create({
   container: {
@@ -39,23 +41,23 @@ const styles = StyleSheet.create({
   image: {
     width: 312,
     height: 192,
-    marginTop: 170
+    marginTop: 170,
   },
-  text:{
+  text: {
     fontSize: 16,
     textAlign: 'center',
-    margin: 15
+    margin: 15,
   },
   button: {
     marginTop: 10,
     backgroundColor: HIJAU,
-    alignItems: "center",
+    alignItems: 'center',
     justifyContent: 'center',
     width: 80,
-    height: 35
+    height: 35,
   },
   buttonText: {
     color: PUTIH,
-    fontSize: 14
-  }
-})
+    fontSize: 14,
+  },
+});

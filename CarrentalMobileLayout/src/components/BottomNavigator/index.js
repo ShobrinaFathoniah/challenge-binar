@@ -1,5 +1,5 @@
-import { StyleSheet, View  } from 'react-native'
-import React from 'react'
+import { StyleSheet, View } from 'react-native';
+import React from 'react';
 import TabItem from '../TabItem';
 
 const BottomNavigator = ({ state, descriptors, navigation }) => {
@@ -11,8 +11,8 @@ const BottomNavigator = ({ state, descriptors, navigation }) => {
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-            ? options.title
-            : route.name;
+              ? options.title
+              : route.name;
 
         const isFocused = state.index === index;
 
@@ -37,27 +37,27 @@ const BottomNavigator = ({ state, descriptors, navigation }) => {
         };
 
         return (
-         <TabItem 
+          <TabItem
             key={index}
             label={label}
             isFocused={isFocused}
             onPress={onPress}
-            onLongPress={onLongPress} 
+            onLongPress={onLongPress}
           />
         );
       })}
     </View>
-  )
-}
+  );
+};
 
-export default BottomNavigator
+export default BottomNavigator;
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        backgroundColor: '#FFFFFF',
-        justifyContent: 'space-between',
-        paddingHorizontal: 48,
-        paddingVertical: 11
-    }
-})
+  container: {
+    flexDirection: 'row',
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'space-between',
+    paddingHorizontal: 48,
+    paddingVertical: 11,
+  },
+});

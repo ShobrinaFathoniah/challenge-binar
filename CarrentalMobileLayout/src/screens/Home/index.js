@@ -1,8 +1,26 @@
-import { StyleSheet, Text, View , ImageBackground, Dimensions, Image, StatusBar, ScrollView } from 'react-native'
-import { Banner, Background, Profile, IconTruck, IconBox, IconCamera, IconKey, Mobil } from '../../assets'
-import { ABU, BIRU_MUDA, HIJAU, HITAM, PUTIH } from '../../utils/constant'
-import { CarCard, Menu } from '../../components'
-import React from 'react'
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Dimensions,
+  Image,
+  StatusBar,
+  ScrollView,
+} from 'react-native';
+import {
+  Banner,
+  Background,
+  Profile,
+  IconTruck,
+  IconBox,
+  IconCamera,
+  IconKey,
+  Mobil,
+} from '../../assets';
+import { BIRU_MUDA, HITAM } from '../../utils/constant';
+import { CarCard, Menu } from '../../components';
+import React from 'react';
 
 const Home = () => {
   return (
@@ -12,12 +30,12 @@ const Home = () => {
       {/* header */}
       <ImageBackground source={Background} style={styles.header}>
         <Text style={styles.textNama}>Hi, Nama</Text>
-        
+
         <View style={styles.headerContent}>
           <Text style={styles.textLocation}>Your Location</Text>
           <Image source={Profile} style={styles.profile} />
         </View>
-        
+
         <Image source={Banner} style={styles.banner} />
       </ImageBackground>
 
@@ -28,68 +46,91 @@ const Home = () => {
         <Menu icon={IconKey} name="Penginapan" />
         <Menu icon={IconCamera} name="Wisata" />
       </View>
-      
+
       {/* List Mobil */}
       <ScrollView style={styles.listPage}>
         <Text style={styles.textJudul}>Daftar Mobil Pilihan</Text>
         <View style={styles.listMobil}>
-          <CarCard name="Daihatsu Xenia" people={4} storage={2} price="Rp 230.000" pic={Mobil} />
-          <CarCard name="Daihatsu Xenia" people={4} storage={2} price="Rp 230.000" pic={Mobil} />
-          <CarCard name="Daihatsu Xenia" people={4} storage={2} price="Rp 230.000" pic={Mobil} />
-          <CarCard name="Daihatsu Xenia" people={4} storage={2} price="Rp 230.000" pic={Mobil} />
+          <CarCard
+            name="Daihatsu Xenia"
+            people={4}
+            storage={2}
+            price="Rp 230.000"
+            pic={Mobil}
+          />
+          <CarCard
+            name="Daihatsu Xenia"
+            people={4}
+            storage={2}
+            price="Rp 230.000"
+            pic={Mobil}
+          />
+          <CarCard
+            name="Daihatsu Xenia"
+            people={4}
+            storage={2}
+            price="Rp 230.000"
+            pic={Mobil}
+          />
+          <CarCard
+            name="Daihatsu Xenia"
+            people={4}
+            storage={2}
+            price="Rp 230.000"
+            pic={Mobil}
+          />
         </View>
-        
       </ScrollView>
     </View>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 
 const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   page: {
-    flex: 1
+    flex: 1,
   },
   header: {
     width: windowWidth,
-    height: 176
+    height: 176,
   },
-  profile:{
+  profile: {
     marginStart: 220,
-    marginTop: -20
+    marginTop: -20,
   },
-  banner:{
+  banner: {
     width: 328,
     height: 140,
     marginTop: 30,
-    marginLeft: 33
+    marginLeft: 33,
   },
   headerContent: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   textNama: {
     fontSize: 15,
     marginTop: 20,
     marginStart: 16,
     paddingBottom: 5,
-    color: HITAM
+    color: HITAM,
   },
   textLocation: {
     fontSize: 18,
     color: HITAM,
     marginStart: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   menuAll: {
     marginTop: 100,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   listPage: {
     marginTop: 25,
-    marginBottom: 10
+    marginBottom: 10,
   },
   textJudul: {
     marginStart: 16,
@@ -98,36 +139,6 @@ const styles = StyleSheet.create({
     color: HITAM,
   },
   listMobil: {
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  card: {
-    width: 330,
-    height: 100,
-    borderRadius: 4,
-    padding: 16,
-    backgroundColor: PUTIH,
-    borderColor: ABU,
-    marginTop: 10
-  },
-  mobilInfo: {
-    marginStart: 15
-  },
-  mobilName: {
-    fontSize: 14,
-    color: HITAM,
-  },
-  mobilInfo1: {
-    marginTop: 5,
-    flexDirection: 'row',
-  },
-  number: {
-    marginStart: 4,
-    fontSize: 10
-  },
-  harga: {
-    color: HIJAU,
-    fontSize: 14,
-    marginTop: 5,
-  }
-  
-})
+});
