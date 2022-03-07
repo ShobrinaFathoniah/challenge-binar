@@ -18,7 +18,7 @@ import {
   IconKey,
   Mobil,
 } from '../../assets';
-import { BIRU_MUDA, HITAM } from '../../utils/constant';
+import { BIRU_MUDA, HITAM, PUTIH } from '../../utils/constant';
 import { CarCard, Menu } from '../../components';
 import React from 'react';
 
@@ -36,7 +36,9 @@ const Home = () => {
           <Image source={Profile} style={styles.profile} />
         </View>
 
-        <Image source={Banner} style={styles.banner} />
+        <View style={styles.containerBanner}>
+          <Image source={Banner} style={styles.banner} />
+        </View>
       </ImageBackground>
 
       {/* Menu */}
@@ -92,6 +94,7 @@ const windowWidth = Dimensions.get('window').width;
 const styles = StyleSheet.create({
   page: {
     flex: 1,
+    backgroundColor: PUTIH
   },
   header: {
     width: windowWidth,
@@ -101,11 +104,13 @@ const styles = StyleSheet.create({
     marginStart: 220,
     marginTop: -20,
   },
+  containerBanner:{
+    marginTop: 30,
+    alignItems: 'center'
+  },
   banner: {
     width: 328,
     height: 140,
-    marginTop: 30,
-    marginLeft: 33,
   },
   headerContent: {
     flexDirection: 'row',
@@ -130,7 +135,6 @@ const styles = StyleSheet.create({
   },
   listPage: {
     marginTop: 25,
-    marginBottom: 10,
   },
   textJudul: {
     marginStart: 16,
@@ -140,5 +144,6 @@ const styles = StyleSheet.create({
   },
   listMobil: {
     alignItems: 'center',
+    marginBottom: 10
   },
 });

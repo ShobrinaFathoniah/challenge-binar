@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { CarCard } from '../../components';
 import { Mobil } from '../../assets';
-import { HITAM } from '../../utils/constant';
+import { HITAM, PUTIH } from '../../utils/constant';
 import React from 'react';
 
 const DaftarMobil = () => {
@@ -105,10 +105,11 @@ export default DaftarMobil;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 10,
+    backgroundColor: PUTIH
   },
   listPage: {
     marginTop: 25,
+    marginBottom: 10,
   },
   textJudul: {
     marginStart: 16,

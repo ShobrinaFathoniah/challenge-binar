@@ -30,11 +30,11 @@ export default TabItem
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center'
+        alignItems: 'center',
     },
     text: (isFocused) => ({
         fontSize: 10,
         color: isFocused ? BIRU : ABU,
-        margin: 8
+        margin: 5
     })
 })

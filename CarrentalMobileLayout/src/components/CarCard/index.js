@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
-import { ABU, HIJAU, HITAM, NEUTRAL, PUTIH } from '../../utils/constant';
+import { ABU, HIJAU, HITAM, NEUTRAL, SHADOW } from '../../utils/constant';
 import Feather from 'react-native-vector-icons/Feather';
 import React from 'react';
 
@@ -43,9 +43,10 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 4,
     padding: 16,
-    backgroundColor: PUTIH,
     borderColor: ABU,
     marginTop: 10,
+    borderWidth: 0.5,
+    borderColor: SHADOW
   },
   mobilInfo: {
     marginStart: 15,
