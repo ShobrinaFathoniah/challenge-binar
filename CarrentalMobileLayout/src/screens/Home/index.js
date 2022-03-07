@@ -5,7 +5,6 @@ import {
   ImageBackground,
   Dimensions,
   Image,
-  StatusBar,
   ScrollView,
 } from 'react-native';
 import {
@@ -18,14 +17,13 @@ import {
   IconKey,
   Mobil,
 } from '../../assets';
-import { BIRU_MUDA, HITAM, PUTIH } from '../../utils/constant';
+import { HITAM, PUTIH } from '../../utils/constant';
 import { CarCard, Menu } from '../../components';
 import React from 'react';
 
 const Home = () => {
   return (
     <View style={styles.page}>
-      <StatusBar backgroundColor={BIRU_MUDA} />
 
       {/* header */}
       <ImageBackground source={Background} style={styles.header}>
@@ -104,7 +102,7 @@ const styles = StyleSheet.create({
     marginStart: 220,
     marginTop: -20,
   },
-  containerBanner:{
+  containerBanner: {
     marginTop: 30,
     alignItems: 'center'
   },
