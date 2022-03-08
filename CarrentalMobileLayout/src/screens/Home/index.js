@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   menuAll: {
-    marginTop: 100,
+    marginTop: 92,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
   },

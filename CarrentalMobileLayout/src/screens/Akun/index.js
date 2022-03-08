@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textAlign: 'center',
+    color: HITAM,
     margin: 16,
+    fontWeight: '300'
   },
 });
