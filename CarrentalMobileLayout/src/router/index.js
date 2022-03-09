@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, Splash, DaftarMobil, Akun } from '../screens';
+import { Home, DaftarMobil, Akun } from '../screens';
 import { BottomNavigator } from '../components';
 import React from 'react';
 
@@ -24,12 +24,7 @@ const MainApp = () => {
 
 const Router = () => {
   return (
-    <Stack.Navigator initialRouteName="Splash">
-      <Stack.Screen
-        name="Splash"
-        component={Splash}
-        options={{ headerShown: false }}
-      />
+    <Stack.Navigator>
       <Stack.Screen
         name="MainApp"
         component={MainApp}
