@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { CarCard } from '../../components';
 import { Mobil } from '../../assets';
 import { HITAM, PUTIH } from '../../utils/constant';

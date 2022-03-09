@@ -5,7 +5,6 @@ import HelveticaFont from '../HelveticaFont';
 const Button = ({ name, buttonColor, textColor }) => {
     const styles = StyleSheet.create({
         button: {
-            marginTop: 16,
             backgroundColor: buttonColor,
             alignItems: 'center',
             justifyContent: 'center',
