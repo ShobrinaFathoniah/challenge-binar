@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
 import React from 'react'
 
-const HelveticaFont = ({type="Regular", children, style}) => {
+const HelveticaFont = ({ type = "Regular", children, style }) => {
 
     const passedStyles = Array.isArray(style) ? Object.assign({}, ...style) : style
 
@@ -11,7 +11,7 @@ const HelveticaFont = ({type="Regular", children, style}) => {
         }
     })
 
-  return <Text style={[styles.font, , { ...passedStyles }]} >{children}</Text>
+    return <Text style={[styles.font, { ...passedStyles }]} >{children}</Text>
 }
 
 export default HelveticaFont

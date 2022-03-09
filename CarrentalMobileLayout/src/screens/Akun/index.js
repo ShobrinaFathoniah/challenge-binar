@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { HIJAU, HITAM, PUTIH } from '../../utils/constant';
 import { NotRegistered } from '../../assets';
 import React from 'react';

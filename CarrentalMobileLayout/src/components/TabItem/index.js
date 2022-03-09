@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity, StatusBar } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, StatusBar } from 'react-native'
 import { ABU, BIRU, BIRU_MUDA, PUTIH } from '../../utils/constant'
 import React from 'react'
 import Feather from 'react-native-vector-icons/Feather'
