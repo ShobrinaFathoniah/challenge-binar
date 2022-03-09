@@ -1,10 +1,10 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import React from 'react'
+import HelveticaFont from '../HelveticaFont';
 
 const Button = ({ name, buttonColor, textColor }) => {
-
-    return (
-        <TouchableOpacity style={{
+    const styles = StyleSheet.create({
+        button: {
             marginTop: 16,
             backgroundColor: buttonColor,
             alignItems: 'center',
@@ -14,11 +14,16 @@ const Button = ({ name, buttonColor, textColor }) => {
             borderRadius: 2,
             paddingVertical: 8,
             paddingHorizontal: 12
-        }}>
-            <Text style={{
-                color: textColor,
-                fontSize: 14,
-            }}>{name}</Text>
+        },
+        text: {
+            color: textColor,
+            fontSize: 14,
+        }
+    })
+
+    return (
+        <TouchableOpacity style={styles.button}>
+            <HelveticaFont style={styles.text}>{name}</HelveticaFont>
         </TouchableOpacity>
     )
 }

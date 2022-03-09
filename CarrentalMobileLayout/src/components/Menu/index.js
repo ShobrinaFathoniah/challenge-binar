@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View, ImageBackground, Image } from 'react-native';
+import { StyleSheet, View, ImageBackground, Image } from 'react-native';
 import { Kotak } from '../../assets';
 import React from 'react';
+import HelveticaFont from '../HelveticaFont';
 
 const Menu = ({ icon, name }) => {
   return (
@@ -8,7 +9,7 @@ const Menu = ({ icon, name }) => {
       <ImageBackground source={Kotak} style={styles.menu}>
         <Image source={icon} style={styles.icon} />
       </ImageBackground>
-      <Text style={styles.menuName}>{name}</Text>
+      <HelveticaFont style={styles.menuName}>{name}</HelveticaFont>
     </View>
   );
 };

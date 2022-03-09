@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import { ABU, HIJAU, HITAM, NEUTRAL, SHADOW } from '../../utils/constant';
 import Feather from 'react-native-vector-icons/Feather';
 import React from 'react';
+import HelveticaFont from '../HelveticaFont';
 
 const CarCard = ({ name, people, storage, price, pic }) => {
   return (
@@ -10,12 +11,12 @@ const CarCard = ({ name, people, storage, price, pic }) => {
         <Image source={pic} style={{ marginTop: 7 }} />
 
         <View style={styles.mobilInfo}>
-          <Text style={styles.mobilName}>{name}</Text>
+          <HelveticaFont style={styles.mobilName}>{name}</HelveticaFont>
 
           <View style={{ flexDirection: 'row' }}>
             <View style={styles.mobilInfo1}>
               <Feather name="users" color={NEUTRAL} size={12} />
-              <Text style={styles.number}>{people}</Text>
+              <HelveticaFont style={styles.number}>{people}</HelveticaFont>
             </View>
             <View style={styles.mobilInfo1}>
               <Feather
@@ -24,11 +25,11 @@ const CarCard = ({ name, people, storage, price, pic }) => {
                 color={NEUTRAL}
                 size={12}
               />
-              <Text style={styles.number}>{storage}</Text>
+              <HelveticaFont style={styles.number}>{storage}</HelveticaFont>
             </View>
           </View>
 
-          <Text style={styles.harga}>{price}</Text>
+          <HelveticaFont style={styles.harga}>{price}</HelveticaFont>
         </View>
       </View>
     </View>

@@ -3,6 +3,7 @@ import { ABU, BIRU, BIRU_MUDA, PUTIH } from '../../utils/constant'
 import React from 'react'
 import Feather from 'react-native-vector-icons/Feather'
 import { useIsFocused } from '@react-navigation/native'
+import HelveticaFont from '../HelveticaFont'
 
 const TabItem = ({ isFocused, onPress, onLongPress, label }) => {
 
@@ -60,9 +61,9 @@ const TabItem = ({ isFocused, onPress, onLongPress, label }) => {
             style={styles.container}
         >
             <Icon />
-            <Text style={styles.text(isFocused)}>
+            <HelveticaFont style={styles.text(isFocused)}>
                 {label}
-            </Text>
+            </HelveticaFont>
         </TouchableOpacity>
     )
 }

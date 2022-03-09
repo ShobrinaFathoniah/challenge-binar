@@ -18,7 +18,7 @@ import {
   Mobil,
 } from '../../assets';
 import { HITAM, PUTIH } from '../../utils/constant';
-import { CarCard, Menu } from '../../components';
+import { CarCard, HelveticaFont, Menu } from '../../components';
 import React from 'react';
 
 const Home = () => {
@@ -27,10 +27,10 @@ const Home = () => {
 
       {/* header */}
       <ImageBackground source={Background} style={styles.header}>
-        <Text style={styles.textNama}>Hi, Nama</Text>
+        <HelveticaFont style={styles.textNama}>Hi, Nama</HelveticaFont>
 
         <View style={styles.headerContent}>
-          <Text style={styles.textLocation}>Your Location</Text>
+          <HelveticaFont type='Bold' style={styles.textLocation}>Your Location</HelveticaFont>
           <Image source={Profile} style={styles.profile} />
         </View>
 
@@ -49,7 +49,7 @@ const Home = () => {
 
       {/* List Mobil */}
       <ScrollView style={styles.listPage}>
-        <Text style={styles.textJudul}>Daftar Mobil Pilihan</Text>
+        <HelveticaFont type='Bold' style={styles.textJudul}>Daftar Mobil Pilihan</HelveticaFont>
         <View style={styles.listMobil}>
           <CarCard
             name="Daihatsu Xenia"
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     marginTop: -20,
   },
   containerBanner: {
-    marginTop: 30,
+    marginTop: 20,
     alignItems: 'center'
   },
   banner: {
@@ -124,7 +124,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: HITAM,
     marginStart: 16,
-    fontWeight: 'bold',
   },
   menuAll: {
     marginTop: 92,
@@ -137,7 +136,6 @@ const styles = StyleSheet.create({
   textJudul: {
     marginStart: 16,
     fontSize: 18,
-    fontWeight: 'bold',
     color: HITAM,
   },
   listMobil: {

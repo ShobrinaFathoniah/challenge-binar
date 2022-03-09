@@ -3,18 +3,19 @@ import { HIJAU, HITAM, PUTIH } from '../../utils/constant';
 import { NotRegistered } from '../../assets';
 import React from 'react';
 import { Button } from '../../components';
+import { HelveticaFont } from '../../components';
 
 const Akun = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textJudul}>Akun</Text>
+      <HelveticaFont type='Bold' style={styles.textJudul}>Akun</HelveticaFont>
 
       <View style={styles.contentContainer}>
         <Image source={NotRegistered} style={styles.image} />
-        <Text style={styles.text}>
+        <HelveticaFont style={styles.text}>
           Upss kamu belum memiliki akun. Mulai buat akun agar transaksi di BCR
           lebih mudah
-        </Text>
+        </HelveticaFont>
         <Button name="Register" buttonColor={HIJAU} textColor={PUTIH} />
 
       </View>
@@ -33,7 +34,6 @@ const styles = StyleSheet.create({
     marginStart: 16,
     marginTop: 18,
     fontSize: 18,
-    fontWeight: 'bold',
     color: HITAM,
   },
   contentContainer: {
@@ -49,6 +49,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: HITAM,
     margin: 16,
-    fontWeight: '300'
   },
 });
