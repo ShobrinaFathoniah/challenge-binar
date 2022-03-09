@@ -2,8 +2,7 @@ import { StyleSheet, View, Image } from 'react-native';
 import { HIJAU, HITAM, PUTIH } from '../../utils/constant';
 import { NotRegistered } from '../../assets';
 import React from 'react';
-import { Button } from '../../components';
-import { HelveticaFont } from '../../components';
+import { Button, HelveticaFont } from '../../components';
 
 const Akun = () => {
   return (
@@ -17,7 +16,6 @@ const Akun = () => {
           lebih mudah
         </HelveticaFont>
         <Button name="Register" buttonColor={HIJAU} textColor={PUTIH} />
-
       </View>
     </View>
   );
