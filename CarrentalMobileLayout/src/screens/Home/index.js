@@ -39,7 +39,7 @@ const renderItem = ({ item }) => (
 
 const Home = () => {
   return (
-    <View style={styles.page}>
+    <ScrollView style={styles.page}>
 
       {/* header */}
       <ImageBackground source={Background} style={styles.header}>
@@ -64,7 +64,7 @@ const Home = () => {
       </View>
 
       {/* List Mobil */}
-      <ScrollView style={styles.listPage}>
+      <View style={styles.listPage}>
         <HelveticaFont type='Bold' style={styles.textJudul}>Daftar Mobil Pilihan</HelveticaFont>
         <View style={styles.listMobil}>
           <FlatList
@@ -73,8 +73,8 @@ const Home = () => {
             keyExtractor={item => item.id}
           />
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
