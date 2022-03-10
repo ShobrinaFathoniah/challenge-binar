@@ -5,6 +5,7 @@ import {
   Dimensions,
   Image,
   ScrollView,
+  FlatList
 } from 'react-native';
 import {
   Banner,
@@ -18,7 +19,23 @@ import {
 } from '../../assets';
 import { HITAM, PUTIH } from '../../utils/constant';
 import { CarCard, HelveticaFont, Menu } from '../../components';
+import { DATA } from '../../utils/data';
 import React from 'react';
+
+const Item = ({ name, people, storage, price }) => (
+  <CarCard
+    name={name}
+    people={people}
+    storage={storage}
+    price={price}
+    pic={Mobil}
+  />
+
+);
+
+const renderItem = ({ item }) => (
+  <Item name={item.name} people={item.people} storage={item.storage} price={item.price} />
+);
 
 const Home = () => {
   return (
@@ -50,33 +67,10 @@ const Home = () => {
       <ScrollView style={styles.listPage}>
         <HelveticaFont type='Bold' style={styles.textJudul}>Daftar Mobil Pilihan</HelveticaFont>
         <View style={styles.listMobil}>
-          <CarCard
-            name="Daihatsu Xenia"
-            people={4}
-            storage={2}
-            price="Rp 230.000"
-            pic={Mobil}
-          />
-          <CarCard
-            name="Daihatsu Xenia"
-            people={4}
-            storage={2}
-            price="Rp 230.000"
-            pic={Mobil}
-          />
-          <CarCard
-            name="Daihatsu Xenia"
-            people={4}
-            storage={2}
-            price="Rp 230.000"
-            pic={Mobil}
-          />
-          <CarCard
-            name="Daihatsu Xenia"
-            people={4}
-            storage={2}
-            price="Rp 230.000"
-            pic={Mobil}
+          <FlatList
+            data={DATA}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
           />
         </View>
       </ScrollView>
