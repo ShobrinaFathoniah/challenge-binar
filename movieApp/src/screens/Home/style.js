@@ -15,7 +15,7 @@ const style = StyleSheet.create({
     },
     subTitle: {
         color: BLACK,
-        fontSize: moderateScale(15),
+        fontSize: moderateScale(18),
         margin: moderateScale(10)
     },
     cardHorizontal:{

@@ -10,9 +10,7 @@ import moment from 'moment'
 const DetailCard = ({ image, title, releaseDate, rating = 0, genre, id }) => {
 
     const release_date = moment(releaseDate).format('DD MMMM YYYY')
-    const ratingCompleted = (rating) => {
-        console.log("Rating is: " + rating)
-    }
+    const rate = rating*10
 
     return (
         <View style={style.page}>
@@ -23,7 +21,6 @@ const DetailCard = ({ image, title, releaseDate, rating = 0, genre, id }) => {
                 <View style={{ flex: 2, marginStart: moderateScale(10), }}>
                     <LibreBaskerville style={styles.textTitle}>{title}</LibreBaskerville>
                     <LibreBaskerville style={styles.rating}>{rating}</LibreBaskerville>
-
                     {/* genre masih aneh */}
                     <LibreBaskerville style={styles.genre}>{genre}</LibreBaskerville>
                     <LibreBaskerville style={styles.releaseDate}>{release_date}</LibreBaskerville>
@@ -49,7 +46,7 @@ const styles = StyleSheet.create({
         borderRadius: moderateScale(5)
     },
     textTitle: {
-        fontSize: moderateScale(20),
+        fontSize: moderateScale(15),
         color: BROWN_700,
         marginBottom: moderateScale(10)
     },
