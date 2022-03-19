@@ -28,6 +28,11 @@
 		7A3BD8D5B4664A028DCAFABB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 80B473464A524E50B8ACFE6E /* Octicons.ttf */; };
 		160225C29ABD489FBD22B496 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3AFD7A38C6243039E5D52C1 /* SimpleLineIcons.ttf */; };
 		0397B87B062D4A3DB758E837 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F02FE45002AF4AD2AF6B0BFC /* Zocial.ttf */; };
+		EF940D0F07C24BC880B20E8A /* Amita-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A4360AD459D64AB093927ABF /* Amita-Regular.ttf */; };
+		E119CC247410440FA2EA3B1A /* LibreBaskerville-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C2CF7C461974CA18312508D /* LibreBaskerville-Bold.ttf */; };
+		1216D3A88A754D198623442D /* LibreBaskerville-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90363571A1EC4715A59158B4 /* LibreBaskerville-Italic.ttf */; };
+		78809F6AE9FC4FA7AAE42AAD /* LibreBaskerville-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4CA3AF806804E849A31FD94 /* LibreBaskerville-Regular.ttf */; };
+		45972627462F41878C10752F /* Rancho-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E2630F0B0DE64A3DAFD66BF5 /* Rancho-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +73,11 @@
 		80B473464A524E50B8ACFE6E /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		A3AFD7A38C6243039E5D52C1 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		F02FE45002AF4AD2AF6B0BFC /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A4360AD459D64AB093927ABF /* Amita-Regular.ttf */ = {isa = PBXFileReference; name = "Amita-Regular.ttf"; path = "../src/assets/fonts/Amita-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5C2CF7C461974CA18312508D /* LibreBaskerville-Bold.ttf */ = {isa = PBXFileReference; name = "LibreBaskerville-Bold.ttf"; path = "../src/assets/fonts/LibreBaskerville-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		90363571A1EC4715A59158B4 /* LibreBaskerville-Italic.ttf */ = {isa = PBXFileReference; name = "LibreBaskerville-Italic.ttf"; path = "../src/assets/fonts/LibreBaskerville-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		C4CA3AF806804E849A31FD94 /* LibreBaskerville-Regular.ttf */ = {isa = PBXFileReference; name = "LibreBaskerville-Regular.ttf"; path = "../src/assets/fonts/LibreBaskerville-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E2630F0B0DE64A3DAFD66BF5 /* Rancho-Regular.ttf */ = {isa = PBXFileReference; name = "Rancho-Regular.ttf"; path = "../src/assets/fonts/Rancho-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +186,11 @@
 				80B473464A524E50B8ACFE6E /* Octicons.ttf */,
 				A3AFD7A38C6243039E5D52C1 /* SimpleLineIcons.ttf */,
 				F02FE45002AF4AD2AF6B0BFC /* Zocial.ttf */,
+				A4360AD459D64AB093927ABF /* Amita-Regular.ttf */,
+				5C2CF7C461974CA18312508D /* LibreBaskerville-Bold.ttf */,
+				90363571A1EC4715A59158B4 /* LibreBaskerville-Italic.ttf */,
+				C4CA3AF806804E849A31FD94 /* LibreBaskerville-Regular.ttf */,
+				E2630F0B0DE64A3DAFD66BF5 /* Rancho-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -287,6 +302,11 @@
 				7A3BD8D5B4664A028DCAFABB /* Octicons.ttf in Resources */,
 				160225C29ABD489FBD22B496 /* SimpleLineIcons.ttf in Resources */,
 				0397B87B062D4A3DB758E837 /* Zocial.ttf in Resources */,
+				EF940D0F07C24BC880B20E8A /* Amita-Regular.ttf in Resources */,
+				E119CC247410440FA2EA3B1A /* LibreBaskerville-Bold.ttf in Resources */,
+				1216D3A88A754D198623442D /* LibreBaskerville-Italic.ttf in Resources */,
+				78809F6AE9FC4FA7AAE42AAD /* LibreBaskerville-Regular.ttf in Resources */,
+				45972627462F41878C10752F /* Rancho-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
