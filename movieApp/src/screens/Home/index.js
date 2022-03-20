@@ -10,6 +10,7 @@ const Home = ({ navigation }) => {
     // API masih belum sesuai
     const [listRecommended, setListRecommended] = useState([])
     const [listLatest, setListLatest] = useState([])
+    const [listGenre, setListGenre] = useState([])
 
     useEffect(() => {
         getRecommendedMovie()
@@ -18,10 +19,9 @@ const Home = ({ navigation }) => {
 
     const getRecommendedMovie = async () => {
         try {
-            const results = await axios.get(`${BASE_URL}/movie/now_playing`, { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
+            const results = await axios.get(`${BASE_URL}/movies`)
             console.log(results);
             setListRecommended(results.data.results)
-
         } catch (error) {
             console.log(error);
         }
@@ -35,7 +35,7 @@ const Home = ({ navigation }) => {
 
     const getLatestMovie = async () => {
         try {
-            const results = await axios.get(`${BASE_URL}/movie/upcoming`, { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
+            const results = await axios.get(`${BASE_URL}/movies`)
             console.log(results);
             setListLatest(results.data.results)
 
@@ -60,7 +60,7 @@ const Home = ({ navigation }) => {
     //     try {
     //         const res = await axios.get(`${BASE_URL}genre/movie/list`, { headers: { Authorization: `Bearer ${ACCESS_TOKEN}` } })
     //         console.log(res);
-    //         setListLatest(results)
+    //         setListGenre(results)
     //     } catch (error) {
     //         console.log(error);
     //     }
