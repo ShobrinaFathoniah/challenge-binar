@@ -50,6 +50,7 @@ const Registrasi = ({ navigation }) => {
       if (checkEmail(email) && isValidPassword(password)) {
         const res = await axios.post(`${BASE_URL_STORE}/users`, dataUser)
         console.log(res);
+        
         Alert.alert('Pemberitahuan', 'Registration Berhasil', [
           {
             text: "OK", onPress: () => navigation.navigate('Login')

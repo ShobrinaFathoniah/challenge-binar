@@ -1,11 +1,11 @@
-import { StatusBar, Image, ScrollView, SafeAreaView, TouchableOpacity,TextInput,Alert } from 'react-native'
-import React, {useState} from 'react'
+import { StatusBar, Image, ScrollView, SafeAreaView, TouchableOpacity, TextInput, Alert } from 'react-native'
+import React, { useState } from 'react'
 import { MAIN_COLOR } from '../../utils/colors'
 import styles from './style'
 import axios from 'axios'
 import { LibreBaskerville } from '../../components'
 import { Logo } from '../../assets'
-import {BASE_URL_STORE} from '@env'
+import { BASE_URL_STORE } from '@env'
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState("")
@@ -18,16 +18,37 @@ const Login = ({ navigation }) => {
 
   const login = async () => {
     try {
-      const res = await axios.post(`${BASE_URL_STORE}/auth/login`, dataUser)
-      console.log(res);
-      Alert.alert('Pemberitahuan', 'Login Berhasil', [
-        {
-          text: "OK", onPress: () => navigation.navigate('Home')
+      const res = await axios.post(`${BASE_URL_STORE}/auth/login`, dataUser, {
+        validateStatus: status => {
+          if (status < 201) {
+            Alert.alert('Pemberitahuan', 'Login Berhasil', [
+              {
+                text: "OK", onPress: () => navigation.navigate('Home')
+              }
+            ])
+          } else if (status === 400) {
+            Alert.alert(
+              "Pemberitahuan",
+              "HTTP STATUS 400"
+            );
+          } else if (status === 401) {
+            Alert.alert(
+              "Pemberitahuan",
+              "Error: Salah Username atau Password"
+            );
+          }else if (status > 500) {
+            Alert.alert(
+              "Pemberitahuan",
+              "Error: Server"
+            );
+          }
         }
-      ])
+      })
+
+      console.log(res);
     } catch (error) {
       console.log(error);
-      Alert.alert('Pemberitahuan', `Error: Registrasi Gagal karena ${error}`)
+      //Alert.alert('Pemberitahuan', `Error: Login Gagal karena ${error}`)
     }
   }
 
@@ -55,6 +76,7 @@ const Login = ({ navigation }) => {
         />
       </SafeAreaView>
 
+      {/* button */}
       <TouchableOpacity style={styles.button} onPress={login}>
         <LibreBaskerville style={styles.buttonText}>Login</LibreBaskerville>
       </TouchableOpacity>

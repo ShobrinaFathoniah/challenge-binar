@@ -1,4 +1,4 @@
-import { View, StatusBar, FlatList, ScrollView, TouchableOpacity } from 'react-native'
+import { View, StatusBar, FlatList, ScrollView, TouchableOpacity, Alert, BackHandler } from 'react-native'
 import { MAIN_COLOR } from '../../utils/colors'
 import { Amita, MiniCard, LibreBaskerville, DetailCard } from '../../components'
 import { BASE_URL, ACCESS_TOKEN, IMAGE_URL } from '@env'
@@ -11,6 +11,28 @@ const Home = ({ navigation }) => {
     const [listRecommended, setListRecommended] = useState([])
     const [listLatest, setListLatest] = useState([])
     const [listGenre, setListGenre] = useState([])
+
+    // tombol exit 
+    useEffect(() => {
+        const backAction = () => {
+            Alert.alert("Hold on!", "Do you want to exit the application?", [
+                {
+                    text: "Cancel",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "YES", onPress: () => BackHandler.exitApp() }
+            ]);
+            return true;
+        };
+
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
+    }, [])
 
     useEffect(() => {
         getRecommendedMovie()
@@ -28,8 +50,14 @@ const Home = ({ navigation }) => {
     }
 
     const recommendedMovie = (({ item }) => {
+        const idMovie = item.id
+        
         return (
-            <MiniCard image={`${IMAGE_URL}${item.poster_path}`} />
+            <TouchableOpacity onPress={() => navigation.navigate("Detail", {
+                params: { idMovie }
+            })}>
+                <MiniCard image={`${item.poster_path}`} />
+            </TouchableOpacity>
         )
     })
 
@@ -51,7 +79,7 @@ const Home = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate("Detail", {
                 params: { idMovie }
             })}>
-                <DetailCard image={`${IMAGE_URL}${item.poster_path}`} title={item.title} rating={item.vote_average} releaseDate={item.release_date} genre={item.genre_ids} />
+                <DetailCard image={`${item.poster_path}`} title={item.title} rating={item.vote_average} releaseDate={item.release_date} genre={item.genre_ids} />
             </TouchableOpacity>
         )
     })

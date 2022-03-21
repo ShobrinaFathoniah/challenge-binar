@@ -1,9 +1,10 @@
-import { View, StatusBar } from 'react-native'
+import { View, StatusBar, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import style from './style'
 import axios from 'axios'
 import { MiniCard } from '../../components'
 import { MAIN_COLOR } from '../../utils/colors'
+import { BASE_URL } from '@env'
 
 const Detail = ({ route }) => {
   const { params } = route.params;
@@ -13,7 +14,7 @@ const Detail = ({ route }) => {
 
   const getDetailMovie = async () => {
     try {
-      const res = await axios.get(`http://code.aldipee.com/api/v1/movies/${idMovie}`)
+      const res = await axios.get(`${BASE_URL}/movies/${idMovie}`)
       console.log(idMovie);
       console.log(res);
       setDetailMovie(res.data)
@@ -31,8 +32,13 @@ const Detail = ({ route }) => {
     <View style={style.mainPage}>
       <StatusBar barStyle="dark-content" backgroundColor={MAIN_COLOR} />
 
+      {/* Header */}
+      <View>
+        <Image style={style.backdrop} source={detailMovie.backdrop_path} />
+      </View>
+
       {/* Konten */}
-      <MiniCard image={`${detailMovie.poster_path}`} />
+      <MiniCard image={detailMovie.poster_path} />
     </View>
   )
 }
