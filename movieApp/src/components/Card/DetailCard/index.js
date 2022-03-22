@@ -1,33 +1,26 @@
-import { StyleSheet, Image, View } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import React from 'react'
-import style from '../../../screens/Home/style'
-import { BLACK, BROWN_700, PURPLE_500 } from '../../../utils/colors'
 import { moderateScale } from 'react-native-size-matters'
+import { PURPLE_100, PURPLE_500 } from '../../../utils/colors'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { LibreBaskerville } from '../../Fonts'
-import moment from 'moment'
 
-const DetailCard = ({ image, title, releaseDate, rating = 0, genre, id }) => {
-
-    const release_date = moment(releaseDate).format('DD MMMM YYYY')
-    const rate = rating*10
-
+const DetailCard = ({ urlImage, title, releaseDate, voting, tagLine, status, runtime }) => {
     return (
-        <View style={style.page}>
-            <View style={{ flexDirection: 'row', marginBottom: moderateScale(10) }}>
-                <View style={{}}>
-                    <Image style={styles.image} source={{ uri: `${image}` }} />
+        <View style={styles.card}>
+            <View style={styles.contents}>
+                <View style={styles.containerPoster}>
+                    <Image style={styles.poster} source={{ uri: `${urlImage}` }} />
                 </View>
-                <View style={{ flex: 2, marginStart: moderateScale(10), }}>
-                    <LibreBaskerville style={styles.textTitle}>{title}</LibreBaskerville>
-                    <LibreBaskerville style={styles.rating}>{rating}</LibreBaskerville>
-                    {/* genre masih aneh */}
-                    <LibreBaskerville style={styles.genre}>{genre}</LibreBaskerville>
-                    <LibreBaskerville style={styles.releaseDate}>{release_date}</LibreBaskerville>
+                <View style={styles.containerContent}>
+                    <LibreBaskerville style={styles.title}>{title}</LibreBaskerville>
+                    <LibreBaskerville>{releaseDate}</LibreBaskerville>
+                    <LibreBaskerville>{voting}</LibreBaskerville>
+                    <LibreBaskerville>{tagLine}</LibreBaskerville>
+                    <LibreBaskerville>{status}</LibreBaskerville>
+                    <LibreBaskerville>{runtime}</LibreBaskerville>
                 </View>
             </View>
-
-
         </View>
     )
 }
@@ -35,34 +28,34 @@ const DetailCard = ({ image, title, releaseDate, rating = 0, genre, id }) => {
 export default DetailCard
 
 const styles = StyleSheet.create({
-    page: {
+    card: {
         flex: 1,
+        width: widthPercentageToDP(90),
+        height: moderateScale(180),
+        backgroundColor: PURPLE_500,
+        borderRadius: moderateScale(10),
+        alignSelf: 'center',
 
     },
-    image: {
-        backgroundColor: PURPLE_500,
-        height: heightPercentageToDP(30),
-        width: widthPercentageToDP(40),
-        borderRadius: moderateScale(5)
+    contents: {
+        flexDirection: 'row'
     },
-    textTitle: {
-        fontSize: moderateScale(15),
-        color: BROWN_700,
-        marginBottom: moderateScale(10)
+    containerPoster: {
+        margin: moderateScale(5)
     },
-    rating: {
-        fontSize: moderateScale(13),
-        color: BLACK,
-        marginBottom: moderateScale(10)
+    poster: {
+        // backgroundColor: PURPLE_500,
+        height: heightPercentageToDP(23),
+        width: widthPercentageToDP(30),
+        resizeMode: 'contain',
+        borderRadius: moderateScale(10),
     },
-    genre: {
-        fontSize: moderateScale(13),
-        color: BLACK,
-        marginBottom: moderateScale(10)
+    containerContent: {
+        flex: 1,
+        alignSelf: 'center',
+        margin: moderateScale(5)
     },
-    releaseDate: {
-        fontSize: moderateScale(13),
-        color: BLACK,
-        marginBottom: moderateScale(10)
+    title: {
+        fontSize: moderateScale(18),
     }
 })

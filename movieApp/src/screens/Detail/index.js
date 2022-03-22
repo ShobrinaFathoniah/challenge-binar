@@ -1,8 +1,8 @@
-import { View, StatusBar, Image } from 'react-native'
+import { View, StatusBar, ImageBackground, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import style from './style'
 import axios from 'axios'
-import { MiniCard } from '../../components'
+import { ButtonCircle, DetailCard, LibreBaskerville, MediumCard } from '../../components'
 import { MAIN_COLOR } from '../../utils/colors'
 import { BASE_URL } from '@env'
 
@@ -26,20 +26,49 @@ const Detail = ({ route }) => {
 
   useEffect(() => {
     getDetailMovie()
+    getGenres()
   }, [])
 
+  const getGenres = () => {
+    const genre = detailMovie.genres
+    const allGenres = []
+    for (let index = 0; index < genre.length; index++) {
+      allGenres.push(genre[index]);
+    }
+    return allGenres
+  }
+
   return (
-    <View style={style.mainPage}>
+    <ScrollView style={style.mainPage}>
       <StatusBar barStyle="dark-content" backgroundColor={MAIN_COLOR} />
 
       {/* Header */}
       <View>
-        <Image style={style.backdrop} source={detailMovie.backdrop_path} />
+        <ImageBackground style={style.backdrop} source={{ uri: detailMovie.backdrop_path }} >
+          <View style={style.allButtons}>
+            <View>
+              <ButtonCircle nameIcon="arrow-left" />
+            </View>
+            <View style={style.miniButtons2}>
+              <ButtonCircle nameIcon="heart-o" />
+              <ButtonCircle nameIcon="share-alt" />
+            </View>
+          </View>
+        </ImageBackground>
       </View>
 
       {/* Konten */}
-      <MiniCard image={detailMovie.poster_path} />
-    </View>
+      <View style={style.detailCard} >
+        <DetailCard urlImage={detailMovie.poster_path} title={detailMovie.title} releaseDate={detailMovie.release_date} voting={detailMovie.vote_average} tagLine={detailMovie.tagline} status={detailMovie.status} runtime={detailMovie.runtime} />
+      </View>
+      <View>
+        {/* Genres */}
+        <View>
+          <LibreBaskerville>Genres</LibreBaskerville>
+          <LibreBaskerville>{getGenres()}</LibreBaskerville>
+        </View>
+      </View>
+    </ScrollView>
   )
 }
 

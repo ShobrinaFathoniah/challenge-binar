@@ -1,6 +1,6 @@
 import { View, StatusBar, FlatList, ScrollView, TouchableOpacity, Alert, BackHandler } from 'react-native'
 import { MAIN_COLOR } from '../../utils/colors'
-import { Amita, MiniCard, LibreBaskerville, DetailCard } from '../../components'
+import { Amita, MiniCard, LibreBaskerville, MediumCard } from '../../components'
 import { BASE_URL, ACCESS_TOKEN, IMAGE_URL } from '@env'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -79,7 +79,7 @@ const Home = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate("Detail", {
                 params: { idMovie }
             })}>
-                <DetailCard image={`${item.poster_path}`} title={item.title} rating={item.vote_average} releaseDate={item.release_date} genre={item.genre_ids} />
+                <MediumCard image={`${item.poster_path}`} title={item.title} rating={item.vote_average} releaseDate={item.release_date} genre={item.genre_ids} />
             </TouchableOpacity>
         )
     })

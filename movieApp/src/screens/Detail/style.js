@@ -1,6 +1,10 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
-import { MAIN_COLOR } from '../../utils/colors'
+import { moderateScale } from 'react-native-size-matters'
+import { MAIN_COLOR, PURPLE_100 } from '../../utils/colors'
+
+
+const windowWidth = Dimensions.get('window').width;
 
 const style = StyleSheet.create({
     mainPage: {
@@ -8,10 +12,21 @@ const style = StyleSheet.create({
         backgroundColor: MAIN_COLOR,
     },
     backdrop: {
-        width: widthPercentageToDP(100),
-        height: heightPercentageToDP(50),
+        width: moderateScale(windowWidth),
+        height: heightPercentageToDP(30),
         resizeMode: 'cover',
-        backgroundColor: MAIN_COLOR
+        backgroundColor: PURPLE_100,
+    },
+    allButtons: {
+        flexDirection: 'row',
+        margin: moderateScale(10),
+    },
+    miniButtons2: {
+        flexDirection: 'row',
+        marginStart: moderateScale(250)
+    },
+    detailCard: {
+        marginTop: moderateScale(-120)
     }
 })
 
