@@ -1,31 +1,62 @@
 import { StyleSheet, Image, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import style from '../../../screens/Home/style'
-import { BLACK, BROWN_700, PURPLE_500 } from '../../../utils/colors'
+import { BLACK, BROWN_700, GREEN_300, GREEN_400, PURPLE_100, PURPLE_200, PURPLE_300, PURPLE_500, SHADOW, YELLOW_200 } from '../../../utils/colors'
 import { moderateScale } from 'react-native-size-matters'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { LibreBaskerville } from '../../Fonts'
-import moment from 'moment'
+import { release_year } from '../../../utils/changeDate'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-const MediumCard = ({ image, title, releaseDate, rating = 0, genre, id }) => {
+const MediumCard = ({ image, title, releaseDate, rating = 0, language, adult }) => {
+    const [isAdult, setAdult] = useState(adult)
 
-    const release_date = moment(releaseDate).format('DD MMMM YYYY')
-    const rate = rating*10
+    const movieType = (adult) => {
+
+        if (adult) {
+            return (
+                <View style={[styles.bubble, { backgroundColor: 'red', width: moderateScale(55), }]}>
+                    <LibreBaskerville style={{textAlign: 'center'}}>18+</LibreBaskerville>
+                </View>
+            )
+        } else {
+            return (
+                <View style={styles.bubble}>
+                    <LibreBaskerville style={{textAlign: 'center'}}>All Age</LibreBaskerville>
+                </View>
+            )
+        }
+    }
+
+    const rate = rating * 10
 
     return (
         <View style={style.page}>
-            <View style={{ flexDirection: 'row', marginBottom: moderateScale(10) }}>
+            <View style={{ flexDirection: 'row', marginBottom: moderateScale(10), }}>
                 <View style={{}}>
                     <Image style={styles.image} source={{ uri: `${image}` }} />
                 </View>
-                <View style={{ flex: 2, marginStart: moderateScale(10), }}>
+                <View style={{ flex: 2, marginStart: moderateScale(10), marginTop: moderateScale(25) }}>
                     <LibreBaskerville style={styles.textTitle}>{title}</LibreBaskerville>
-                    <LibreBaskerville style={styles.rating}>{rating}</LibreBaskerville>
-                    <LibreBaskerville style={styles.releaseDate}>{release_date}</LibreBaskerville>
+                    <View style={{ marginTop: moderateScale(15) }}>
+                        <View style={{ flexDirection: 'row', }}>
+                            <LibreBaskerville style={styles.releaseDate}>{release_year(releaseDate)}</LibreBaskerville>
+                            <View style={[styles.rating, { flexDirection: 'row' }]}>
+                                <MaterialIcons name="star" size={18} color={YELLOW_200}/>
+                                <LibreBaskerville style={{marginLeft: moderateScale(3)}}>{rating}</LibreBaskerville>
+
+                            </View>
+                        </View>
+
+
+                        <View style={{ flexDirection: 'row' }}>
+                            {movieType(isAdult)}
+                            <LibreBaskerville style={styles.language}>{language}</LibreBaskerville>
+                        </View>
+                    </View>
+
                 </View>
             </View>
-
-
         </View>
     )
 }
@@ -49,18 +80,41 @@ const styles = StyleSheet.create({
         marginBottom: moderateScale(10)
     },
     rating: {
-        fontSize: moderateScale(13),
+        fontSize: moderateScale(20),
         color: BLACK,
-        marginBottom: moderateScale(10)
-    },
-    genre: {
-        fontSize: moderateScale(13),
-        color: BLACK,
-        marginBottom: moderateScale(10)
+        marginBottom: moderateScale(10),
+        padding: moderateScale(10),
+        width: moderateScale(60),
+        borderRadius: moderateScale(5),
+        backgroundColor: GREEN_300,
     },
     releaseDate: {
         fontSize: moderateScale(13),
         color: BLACK,
-        marginBottom: moderateScale(10)
-    }
+        marginBottom: moderateScale(10),
+        padding: moderateScale(10),
+        width: moderateScale(55),
+        borderRadius: moderateScale(5),
+        backgroundColor: GREEN_300,
+        marginEnd: moderateScale(10),
+        textAlign: 'center'
+    },
+    bubble: {
+        padding: moderateScale(10),
+        width: moderateScale(80),
+        borderRadius: moderateScale(5),
+        backgroundColor: GREEN_400,
+        alignSelf: 'center'
+    },
+    language: {
+        fontSize: moderateScale(13),
+        color: BLACK,
+        marginBottom: moderateScale(10),
+        padding: moderateScale(10),
+        width: moderateScale(40),
+        borderRadius: moderateScale(5),
+        backgroundColor: GREEN_300,
+        marginStart: moderateScale(10),
+        textAlign: 'center'
+    },
 })

@@ -1,15 +1,15 @@
-import { StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { moderateScale } from 'react-native-size-matters'
-import { PURPLE_100, PURPLE_200, PURPLE_500 } from '../../../utils/colors'
+import { BLACK, PURPLE_300 } from '../../../utils/colors'
 
-const ButtonCircle = ({style, nameIcon}) => {
+const ButtonCircle = ({style, nameIcon, onPress}) => {
   const passedStyles = Array.isArray(style) ? Object.assign({}, ...style) : style
 
   return (
-    <TouchableOpacity style={[styles.circle, { ...passedStyles }]}>
-      <FontAwesome style={{ alignSelf: 'center' }} name={nameIcon} color={PURPLE_100} size={15} />
+    <TouchableOpacity onPress={onPress} style={[styles.circle, { ...passedStyles }]}>
+      <FontAwesome style={{ alignSelf: 'center' }} name={nameIcon} color={BLACK} size={18} />
     </TouchableOpacity>
   )
 }
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: moderateScale(35),
     width: moderateScale(35),
-    backgroundColor: PURPLE_500
+    backgroundColor: PURPLE_300
   }
 })

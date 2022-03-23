@@ -196,6 +196,9 @@ dependencies {
     //splash screen
     implementation project(':react-native-splash-screen')
 
+    //bantuan untuk loading bar
+    implementation project(':react-native-svg')
+
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

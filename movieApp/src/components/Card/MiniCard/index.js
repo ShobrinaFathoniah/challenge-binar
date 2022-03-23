@@ -2,7 +2,7 @@ import { StyleSheet, View, Image } from 'react-native'
 import React from 'react'
 import { Rancho } from '../../Fonts'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
-import { PURPLE_400 } from '../../../utils/colors'
+import { BROWN_700, PURPLE_400 } from '../../../utils/colors'
 import { moderateScale } from 'react-native-size-matters'
 
 export default function MiniCard({ image, text }) {
@@ -30,10 +30,11 @@ const styles = StyleSheet.create({
         backgroundColor: PURPLE_400,
     },
     text: {
-        fontSize: moderateScale(15),
+        fontSize: moderateScale(17),
         marginTop: moderateScale(5),
         alignSelf: 'center',
         textAlign: 'center',
-        paddingHorizontal: moderateScale(3)
+        paddingHorizontal: moderateScale(3),
+        color: BROWN_700
     }
 })

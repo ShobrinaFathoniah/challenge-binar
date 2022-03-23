@@ -1,9 +1,10 @@
 import { StyleSheet, View, Image } from 'react-native'
 import React from 'react'
 import { moderateScale } from 'react-native-size-matters'
-import { PURPLE_100, PURPLE_500 } from '../../../utils/colors'
+import { BLACK, BROWN_700, GREEN_700, PURPLE_100, PURPLE_200, PURPLE_500 } from '../../../utils/colors'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { LibreBaskerville } from '../../Fonts'
+import { release_date } from '../../../utils/changeDate'
 
 const DetailCard = ({ urlImage, title, releaseDate, voting, tagLine, status, runtime }) => {
     return (
@@ -13,12 +14,12 @@ const DetailCard = ({ urlImage, title, releaseDate, voting, tagLine, status, run
                     <Image style={styles.poster} source={{ uri: `${urlImage}` }} />
                 </View>
                 <View style={styles.containerContent}>
-                    <LibreBaskerville style={styles.title}>{title}</LibreBaskerville>
-                    <LibreBaskerville>{releaseDate}</LibreBaskerville>
-                    <LibreBaskerville>{voting}</LibreBaskerville>
-                    <LibreBaskerville>{tagLine}</LibreBaskerville>
-                    <LibreBaskerville>{status}</LibreBaskerville>
-                    <LibreBaskerville>{runtime}</LibreBaskerville>
+                    <LibreBaskerville style={[styles.text, {fontSize: moderateScale(18),}]}>{title}</LibreBaskerville>
+                    <LibreBaskerville style={[styles.text, {fontSize: moderateScale(13), }]}>{status}</LibreBaskerville>
+                    <LibreBaskerville style={[styles.text, {fontSize: moderateScale(13),}]}>{release_date(releaseDate)}</LibreBaskerville>
+                    <LibreBaskerville style={[styles.text, {fontSize: moderateScale(13),}]}>{tagLine}</LibreBaskerville>
+                    <LibreBaskerville style={[styles.text, {fontSize: moderateScale(13),}]}>{voting}</LibreBaskerville>
+                    <LibreBaskerville style={[styles.text, {fontSize: moderateScale(13),}]}>{runtime} minutes</LibreBaskerville>
                 </View>
             </View>
         </View>
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: widthPercentageToDP(90),
         height: moderateScale(180),
-        backgroundColor: PURPLE_500,
+        backgroundColor: PURPLE_200,
         borderRadius: moderateScale(10),
         alignSelf: 'center',
 
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
         margin: moderateScale(5)
     },
     poster: {
-        // backgroundColor: PURPLE_500,
         height: heightPercentageToDP(23),
         width: widthPercentageToDP(30),
         resizeMode: 'contain',
@@ -55,7 +55,13 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         margin: moderateScale(5)
     },
-    title: {
-        fontSize: moderateScale(18),
+    text: {
+        color: BLACK,
+        marginBottom: moderateScale(5)
+    },
+    releaseDate: {
+        color:BLACK,
+
     }
+    
 })

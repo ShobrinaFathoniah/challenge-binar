@@ -1,12 +1,13 @@
-import { Image, StatusBar, Alert, SafeAreaView, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { Image, StatusBar, Alert, SafeAreaView, View, TextInput, TouchableOpacity, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import styles from './style'
 import { Logo } from '../../assets'
-import { MAIN_COLOR } from '../../utils/colors'
+import { GREEN_700, MAIN_COLOR, PURPLE_500 } from '../../utils/colors'
 import axios from 'axios'
 import { LibreBaskerville } from '../../components'
 import { BASE_URL_STORE } from '@env'
 import { checkEmail, isValidPassword } from '../../utils/validationData'
+import * as Progress from 'react-native-progress';
 
 const Registrasi = ({ navigation }) => {
 
@@ -23,6 +24,21 @@ const Registrasi = ({ navigation }) => {
   const [lat, setLat] = useState("")
   const [long, setLong] = useState("")
   const [phone, setPhone] = useState("")
+  const [isLoading, setIsLoading] = useState(false);
+
+  // loadingBar
+  const loadingBar = loading => {
+    if (loading) {
+      return (
+        <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
+          <Progress.CircleSnail size={80} indeterminate={true} thickness={5} color={PURPLE_500} />
+        </View>
+      )
+    } else {
+      return (null)
+    }
+  }
+
 
   const dataUser = {
     email: email,
@@ -46,24 +62,45 @@ const Registrasi = ({ navigation }) => {
   }
 
   const registration = async () => {
+    setIsLoading(true)
     try {
-      if (checkEmail(email) && isValidPassword(password)) {
-        const res = await axios.post(`${BASE_URL_STORE}/users`, dataUser)
-        console.log(res);
-        
-        Alert.alert('Pemberitahuan', 'Registration Berhasil', [
-          {
-            text: "OK", onPress: () => navigation.navigate('Login')
-          }
-        ])
-      } else if (!checkEmail(email) && isValidPassword(password)) {
-        return Alert.alert('Pemberitahuan', `Error: Email INVALID`)
-      } else if (checkEmail(email) && !isValidPassword(password)) {
-        return Alert.alert('Pemberitahuan', `Error: Password INVALID`)
+      if (email, username, password, name, city, street, number, zipcode, lat, long, phone) {
+        if (checkEmail(email) && isValidPassword(password)) {
+          const res = await axios.post(`${BASE_URL_STORE}/users`, dataUser)
+          console.log(res);
+
+          Alert.alert('Pemberitahuan', 'Registration Berhasil', [
+            {
+              text: "OK", onPress: () => navigation.navigate('Login')
+            }
+          ])
+          setIsLoading(false)
+
+        } else if (!checkEmail(email) && isValidPassword(password)) {
+          Alert.alert('Pemberitahuan', `Error: Email INVALID`)
+          setIsLoading(false)
+
+        } else if (checkEmail(email) && !isValidPassword(password)) {
+          Alert.alert('Pemberitahuan', `Error: Password INVALID`)
+          setIsLoading(false)
+
+        } else {
+          Alert.alert('Pemberitahuan', `Error: Email & Password INVALID`)
+          setIsLoading(false)
+
+        }
       } else {
-        return Alert.alert('Pemberitahuan', `Error: Email & Password INVALID`)
+        Alert.alert(
+          "Pemberitahuan",
+          "Error: Semua Field Wajib diisi"
+        );
+        setIsLoading(false)
+
       }
+
     } catch (error) {
+      setIsLoading(false)
+
       console.log(error);
       Alert.alert('Pemberitahuan', `Error: Registrasi Gagal karena ${error}`)
     }
@@ -153,10 +190,20 @@ const Registrasi = ({ navigation }) => {
         />
       </SafeAreaView>
 
+      {loadingBar(isLoading)}
+
       {/* Button */}
-      <TouchableOpacity style={styles.button} onPress={registration}>
-        <LibreBaskerville style={styles.buttonText}>Registrasi</LibreBaskerville>
-      </TouchableOpacity>
+      <View style={styles.allButton}>
+        {/* goes to login */}
+        <TouchableOpacity style={[styles.button, { backgroundColor: GREEN_700 }]} onPress={() => navigation.navigate("Login")}>
+          <LibreBaskerville style={styles.buttonText}>Login</LibreBaskerville>
+        </TouchableOpacity>
+
+        {/* registrasi */}
+        <TouchableOpacity style={styles.button} onPress={registration}>
+          <LibreBaskerville style={styles.buttonText}>Registrasi</LibreBaskerville>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   )
 }

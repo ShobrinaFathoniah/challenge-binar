@@ -31,13 +31,16 @@ const styles = StyleSheet.create({
         padding: moderateScale(10),
         borderRadius: moderateScale(3),
         alignSelf: 'center',
-        backgroundColor: GREEN_700,
-
-        marginBottom: moderateScale(10)
+        backgroundColor: PURPLE_500,
+        margin: moderateScale(10)
     },
     buttonText: {
         alignSelf: 'center',
         color: PURPLE_100,
+    },
+    allButton: {
+        flexDirection: 'row',
+        alignSelf: 'center',
     }
 })
 

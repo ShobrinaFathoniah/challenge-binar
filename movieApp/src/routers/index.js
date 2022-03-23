@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 
 const routers = () => {
     return (
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator initialRouteName='Registrasi'>
             <Stack.Screen
                 name="Registrasi"
                 component={Registrasi}
@@ -25,6 +25,7 @@ const routers = () => {
             <Stack.Screen
                 name="Detail"
                 component={Detail}
+                options={{ headerShown: false }}
             />
         </Stack.Navigator>
     );
