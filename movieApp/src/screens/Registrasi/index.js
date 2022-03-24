@@ -123,7 +123,7 @@ const Registrasi = ({ navigation }) => {
       </SafeAreaView>
 
       {/* Input */}
-      <SafeAreaView style={{ flexDirection: 'row' }}>
+      <SafeAreaView style={{ flexDirection: 'row', marginStart: moderateScale(10) }}>
         <Image source={PersonalPic} style={styles.pic} />
         <LibreBaskerville style={[styles.text, { fontSize: moderateScale(20), margin: moderateScale(15), alignSelf: 'center' }]}>Personal Data</LibreBaskerville>
       </SafeAreaView>
@@ -260,24 +260,24 @@ const Registrasi = ({ navigation }) => {
 
         <SafeAreaView style={styles.rowInput}>
           <SafeAreaView>
-            <LibreBaskerville style={styles.text}>Latido</LibreBaskerville>
+            <LibreBaskerville style={styles.text}>Latitude</LibreBaskerville>
             <TextInput
               style={styles.input}
               onChangeText={(value) => setLat(value)}
               value={lat}
-              placeholder="Latido"
+              placeholder="Latitude"
               keyboardType='numeric'
               placeholderTextColor={PRIMARY_LIGHT}
             />
           </SafeAreaView>
 
           <SafeAreaView style={styles.perInput}>
-            <LibreBaskerville style={styles.text}>Longitudo</LibreBaskerville>
+            <LibreBaskerville style={styles.text}>Longitude</LibreBaskerville>
             <TextInput
               style={styles.input}
               onChangeText={(value) => setLong(value)}
               value={long}
-              placeholder="Longitudo"
+              placeholder="Longitude"
               keyboardType='numeric'
               placeholderTextColor={PRIMARY_LIGHT}
             />

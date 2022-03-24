@@ -1,6 +1,6 @@
 import { View, StatusBar, FlatList, ScrollView, TouchableOpacity, Alert, BackHandler } from 'react-native'
 import { PRIMARY_DARK } from '../../utils/colors'
-import { Amita, MiniCard, LibreBaskerville, MediumCard, LoadingBar, RecommendedCard } from '../../components'
+import { Amita, LibreBaskerville, MediumCard, LoadingBar, RecommendedCard } from '../../components'
 import { BASE_URL } from '@env'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -76,12 +76,6 @@ const Home = ({ navigation }) => {
         )
     })
 
-    //latestUpdated
-    const latest = listLatest.sort(function (a, b) {
-        return new Date(b.release_date) - new Date(a.release_date)
-    })
-    // console.log(latest);
-
     //recommended
     const recommended = listRecommended.filter(function (item) {
         return item.vote_average >= 5
@@ -89,6 +83,12 @@ const Home = ({ navigation }) => {
         return b.vote_average - a.vote_average
     })
     // console.log(recommended);
+
+    //latestUpdated
+    const latest = listLatest.sort(function (a, b) {
+        return new Date(b.release_date) - new Date(a.release_date)
+    })
+    // console.log(latest);
 
     return (
         <ScrollView style={style.mainPage}>

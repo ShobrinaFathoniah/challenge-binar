@@ -1,8 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { heightPercentageToDP } from 'react-native-responsive-screen'
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { moderateScale } from 'react-native-size-matters'
-import { PINK_200, MAIN_COLOR, PURPLE_100, PURPLE_500, PRIMARY_DARK, SECONDARY_DARK } from '../../utils/colors'
-
+import { PINK_200, MAIN_COLOR, PURPLE_100, PURPLE_500, PRIMARY_DARK, SECONDARY_DARK, PURPLE_200_SDW, SECONDARY_LIGHT, PURPLE_400 } from '../../utils/colors'
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -16,6 +15,44 @@ const style = StyleSheet.create({
         height: heightPercentageToDP(30),
         resizeMode: 'cover',
         backgroundColor: SECONDARY_DARK,
+    },
+    image:{
+        height: heightPercentageToDP(35),
+        width: widthPercentageToDP(45),
+        resizeMode: 'contain',
+        borderRadius: moderateScale(10),
+        alignSelf: 'center'
+    },
+    containerPoster:{
+        alignSelf: 'center',
+    },
+    textTitle:{
+        color: MAIN_COLOR,
+        fontSize: moderateScale(25),
+        margin: moderateScale(10),
+        textAlign: 'center'
+    },
+    rating: {
+        alignSelf: 'center',
+    },
+    containerTextDetail:{
+        margin: moderateScale(15),
+        alignSelf: 'center',
+        
+    },
+    textDetail:{
+        color: PURPLE_400,
+        fontSize: moderateScale(14),
+        textAlign:'center'
+    },
+    tagline:{
+        color: SECONDARY_LIGHT,
+        fontSize: moderateScale(22),
+        textAlign: 'center',
+    },
+    containerTagline:{
+        alignSelf: 'center',
+        marginVertical: moderateScale(10),
     },
     allButtons: {
         flexDirection: 'row',
@@ -33,8 +70,8 @@ const style = StyleSheet.create({
         fontSize: moderateScale(18),
         color: MAIN_COLOR
     },
-    container: {
-        marginTop: moderateScale(10)
+    containerGenre: {
+        marginTop: moderateScale(5)
     },
     listGenre: {
         margin: moderateScale(15)

@@ -17,25 +17,21 @@ const Login = ({ navigation }) => {
     username: username, //mor_2314
     password: password //83r5^_
   }
-
+// reactnative netinfoo
+//refresh
+//token asyncstore
   const login = async () => {
     setIsLoading(true)
     try {
       if (username && password) {
         const res = await axios.post(`${BASE_URL_STORE}/auth/login`, dataUser, {
           validateStatus: status => {
-            if (status < 201) {
+            if (status <= 201) {
               Alert.alert('Pemberitahuan', 'Login Berhasil', [
                 {
                   text: "OK", onPress: () => navigation.navigate('Home')
                 }
               ])
-              setIsLoading(false)
-            } else if (status === 400) {
-              Alert.alert(
-                "Pemberitahuan",
-                "Error: Status 400"
-              );
               setIsLoading(false)
             } else if (status === 401) {
               Alert.alert(

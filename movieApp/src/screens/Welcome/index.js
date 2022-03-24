@@ -9,6 +9,7 @@ const Welcome = ({ navigation }) => {
   return (
     <View style={style.page}>
       <StatusBar barStyle='light-content' backgroundColor={PRIMARY_DARK} />
+      
       <View style={style.color1}>
         <View style={style.containerText}>
           <Rancho style={[style.text, style.textWelcome]}>Welcome</Rancho>
@@ -16,6 +17,7 @@ const Welcome = ({ navigation }) => {
           <Amita style={[style.text, style.textLivies]}>Livies</Amita>
         </View>
       </View>
+
       <View style={style.color2}>
         <Image source={WelcomePic} style={style.welcomePic} />
         <Rancho style={[style.text, style.textEnjoy]}>Enjoy Your Life With Movie</Rancho>

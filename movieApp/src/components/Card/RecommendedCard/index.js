@@ -2,7 +2,7 @@ import { StyleSheet, Image, View } from 'react-native'
 import React from 'react'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { moderateScale } from 'react-native-size-matters'
-import { MAIN_COLOR, PRIMARY_DARK, PURPLE_200_SDW, PURPLE_300_SDW, SECONDARY_DARK } from '../../../utils/colors'
+import { PRIMARY_DARK, PURPLE_200_SDW, SECONDARY_DARK } from '../../../utils/colors'
 import { Rancho } from '../../Fonts'
 
 const RecommendedCard = ({image, text}) => {
@@ -22,12 +22,12 @@ export default RecommendedCard
 
 const styles = StyleSheet.create({
     card: {
-        height: heightPercentageToDP(20),
+        height: heightPercentageToDP(25),
         width: widthPercentageToDP(80),
         marginRight: moderateScale(10)
     },
     image: {
-        height: heightPercentageToDP(20),
+        height: heightPercentageToDP(25),
         width: widthPercentageToDP(80),
         borderRadius: moderateScale(10),
         backgroundColor: SECONDARY_DARK,

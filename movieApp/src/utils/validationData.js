@@ -30,6 +30,6 @@ export const isValidPassword = (givenPassword) => {
             return true
         }
     } else {
-        return "ERROR: Invalid Type Data" 
+        return false //"ERROR: Invalid Type Data" 
     }
 }

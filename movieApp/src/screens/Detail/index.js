@@ -1,13 +1,13 @@
-import { View, StatusBar, ImageBackground, ScrollView, Share, FlatList, TouchableOpacity } from 'react-native'
+import { View, StatusBar, ImageBackground, ScrollView, Share, Image, FlatList, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import style from './style'
 import axios from 'axios'
 import { CommonActions } from '@react-navigation/native';
-import { ButtonCircle, DetailCard, LibreBaskerville, LoadingBar, MiniCard, Rancho } from '../../components'
-import { PRIMARY_DARK } from '../../utils/colors'
+import { ButtonCircle, LibreBaskerville, LoadingBar, MiniCard, Rancho, Rating } from '../../components'
+import { PINK_200, PRIMARY_DARK } from '../../utils/colors'
 import { BASE_URL } from '@env'
 import { moderateScale } from 'react-native-size-matters'
-import moment from 'moment';
+import { release_date } from '../../utils/changeDate';
 
 const Detail = ({ route, navigation }) => {
   const { params } = route.params;
@@ -19,8 +19,6 @@ const Detail = ({ route, navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [end, setEnd] = useState(6);
   const [lengthCastArtist, setLengthCastArtist] = useState(0);
-
-  const release_date = moment(detailMovie.releaseDate).format('DD MMMM YYYY')
 
   const getDetailMovie = async () => {
     setIsLoading(true)
@@ -53,7 +51,7 @@ const Detail = ({ route, navigation }) => {
   const genres = (({ item }) => {
     return (
       <View style={style.genre}>
-        <LibreBaskerville style={{color: PRIMARY_DARK}}>{item.name}</LibreBaskerville>
+        <LibreBaskerville style={{ color: PRIMARY_DARK }}>{item.name}</LibreBaskerville>
       </View>
     )
   })
@@ -69,7 +67,7 @@ const Detail = ({ route, navigation }) => {
   const shareData = () => {
     Share.share({
       message:
-        `"${detailMovie.tagline}"\n\nSaya ingin merekomendasikan Anda film dengan judul '${detailMovie.title}' film ini dirilis pada ${release_date}. Untuk selengkapnya Anda dapat melihat pada link berikut ini ${detailMovie.homepage}.`,
+        `"${detailMovie.tagline}"\n\nSaya ingin merekomendasikan Anda film dengan judul '${detailMovie.title}' film ini dirilis pada ${release_date(detailMovie.release_date)}. Untuk selengkapnya Anda dapat melihat pada link berikut ini ${detailMovie.homepage}.`,
     });
   };
 
@@ -122,12 +120,41 @@ const Detail = ({ route, navigation }) => {
 
       {/* Konten */}
       <View style={style.detailCard} >
-        <DetailCard urlImage={detailMovie.poster_path} title={detailMovie.title} releaseDate={detailMovie.release_date} voting={detailMovie.vote_average} tagLine={detailMovie.tagline} status={detailMovie.status} runtime={detailMovie.runtime} />
+        <View style={style.containerPoster}>
+          <Image source={{ uri: detailMovie.poster_path }} style={style.image} />
+          <LibreBaskerville style={style.textTitle}>{detailMovie.title}</LibreBaskerville>
+        </View>
+
+        <View style={style.rating}>
+          <Rating rating={detailMovie.vote_average} />
+        </View>
+
+        <View style={style.containerTagline}>
+          <LibreBaskerville style={style.tagline} type="Italic">`{detailMovie.tagline}`</LibreBaskerville>
+        </View>
+
+        <View style={{flexDirection: 'row', marginRight: moderateScale(10), alignSelf: 'center'}}>
+          <View style={style.containerTextDetail}>
+            <LibreBaskerville style={style.textDetail}>Status</LibreBaskerville>
+            <LibreBaskerville style={[style.textDetail, {color: PINK_200}]}>{detailMovie.status}</LibreBaskerville>
+          </View>
+          <View style={style.containerTextDetail}>
+            <LibreBaskerville style={style.textDetail}>Release Date</LibreBaskerville>
+            <LibreBaskerville style={[style.textDetail, {color: PINK_200}]}>{release_date(detailMovie.release_date)}</LibreBaskerville>
+          </View>
+          <View style={style.containerTextDetail}>
+            <LibreBaskerville style={style.textDetail}>Runtime</LibreBaskerville>
+            <LibreBaskerville type='Bold' style={[style.textDetail, {color: PINK_200}]}>{detailMovie.runtime} minutes</LibreBaskerville>
+          </View>
+        </View>
+
+
+        {/* <DetailCard urlImage={detailMovie.poster_path} title={detailMovie.title} releaseDate={detailMovie.release_date} voting={detailMovie.vote_average} tagLine={detailMovie.tagline} status={detailMovie.status} runtime={detailMovie.runtime} /> */}
       </View>
 
       {LoadingBar(isLoading)}
 
-      <View style={style.container}>
+      <View style={style.containerGenre}>
         {/* Genres */}
         <View style={style.listGenre}>
           <LibreBaskerville style={style.title}>Genres</LibreBaskerville>
@@ -139,10 +166,10 @@ const Detail = ({ route, navigation }) => {
           />
         </View>
 
-        {/* Synopshis */}
+        {/* Synopsis */}
         <View style={style.synopshisContainer}>
-          <LibreBaskerville style={style.title}>Synopshis</LibreBaskerville>
-          <Rancho style={style.synopshis}>{detailMovie.overview}</Rancho>
+          <LibreBaskerville style={style.title}>Synopsis</LibreBaskerville>
+          <Rancho style={[style.synopshis, {letterSpacing: 0.2}]}>{detailMovie.overview}</Rancho>
         </View>
       </View>
 
@@ -165,6 +192,8 @@ const Detail = ({ route, navigation }) => {
           </View>
         </View>
       </View>
+      {/* listheadercomponen-> semuamasukin
+      footter */}
     </ScrollView>
   )
 }

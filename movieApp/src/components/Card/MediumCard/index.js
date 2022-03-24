@@ -1,7 +1,7 @@
 import { StyleSheet, Image, View } from 'react-native'
 import React, { useState } from 'react'
 import style from '../../../screens/Home/style'
-import { MAIN_COLOR, PRIMARY_DARK, PURPLE_100, SECONDARY_DARK, YELLOW_200 } from '../../../utils/colors'
+import { BROWN_300, GREEN_300, MAIN_COLOR, PRIMARY_DARK, PURPLE_100, SECONDARY_DARK, SECONDARY_LIGHT, YELLOW_200 } from '../../../utils/colors'
 import { moderateScale } from 'react-native-size-matters'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { LibreBaskerville } from '../../Fonts'
@@ -44,7 +44,6 @@ const MediumCard = ({ image, title, releaseDate, rating = 0, language, adult }) 
                             <View style={[styles.text, styles.rating]}>
                                 <MaterialIcons name="star" size={18} color={YELLOW_200}/>
                                 <LibreBaskerville style={{marginLeft: moderateScale(3), color: PRIMARY_DARK}}>{rating}</LibreBaskerville>
-
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
         marginBottom: moderateScale(10),
         padding: moderateScale(10),
         borderRadius: moderateScale(5),
-        backgroundColor: SECONDARY_DARK,
+        backgroundColor: BROWN_300,
     },
     rating: {
         fontSize: moderateScale(20),
@@ -100,7 +99,7 @@ const styles = StyleSheet.create({
         padding: moderateScale(10),
         width: moderateScale(80),
         borderRadius: moderateScale(5),
-        backgroundColor: SECONDARY_DARK,
+        backgroundColor: GREEN_300,
         alignSelf: 'center',
     },
     language: {

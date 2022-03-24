@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
         backgroundColor: PURPLE_200_SDW,
         borderRadius: moderateScale(10),
         alignSelf: 'center',
-
     },
     contents: {
         flexDirection: 'row'
