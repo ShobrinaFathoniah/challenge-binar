@@ -1,12 +1,17 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import { Detail, Home, Login, Registrasi } from '../screens';
+import { Detail, Home, Login, Registrasi, Welcome } from '../screens';
 
 const Stack = createStackNavigator();
 
 const routers = () => {
     return (
-        <Stack.Navigator initialRouteName='Registrasi'>
+        <Stack.Navigator initialRouteName='Welcome'>
+            <Stack.Screen
+                name="Welcome"
+                component={Welcome}
+                options={{ headerShown: false }}
+            />
             <Stack.Screen
                 name="Registrasi"
                 component={Registrasi}

@@ -1,7 +1,7 @@
 import { StyleSheet, Image, View } from 'react-native'
 import React, { useState } from 'react'
 import style from '../../../screens/Home/style'
-import { BLACK, BROWN_700, GREEN_300, GREEN_400, PURPLE_100, PURPLE_200, PURPLE_300, PURPLE_500, SHADOW, YELLOW_200 } from '../../../utils/colors'
+import { MAIN_COLOR, PRIMARY_DARK, PURPLE_100, SECONDARY_DARK, YELLOW_200 } from '../../../utils/colors'
 import { moderateScale } from 'react-native-size-matters'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { LibreBaskerville } from '../../Fonts'
@@ -16,13 +16,13 @@ const MediumCard = ({ image, title, releaseDate, rating = 0, language, adult }) 
         if (adult) {
             return (
                 <View style={[styles.bubble, { backgroundColor: 'red', width: moderateScale(55), }]}>
-                    <LibreBaskerville style={{textAlign: 'center'}}>18+</LibreBaskerville>
+                    <LibreBaskerville style={{textAlign: 'center', color: PRIMARY_DARK}}>18+</LibreBaskerville>
                 </View>
             )
         } else {
             return (
                 <View style={styles.bubble}>
-                    <LibreBaskerville style={{textAlign: 'center'}}>All Age</LibreBaskerville>
+                    <LibreBaskerville style={{textAlign: 'center', color: PRIMARY_DARK}}>All Age</LibreBaskerville>
                 </View>
             )
         }
@@ -40,18 +40,16 @@ const MediumCard = ({ image, title, releaseDate, rating = 0, language, adult }) 
                     <LibreBaskerville style={styles.textTitle}>{title}</LibreBaskerville>
                     <View style={{ marginTop: moderateScale(15) }}>
                         <View style={{ flexDirection: 'row', }}>
-                            <LibreBaskerville style={styles.releaseDate}>{release_year(releaseDate)}</LibreBaskerville>
-                            <View style={[styles.rating, { flexDirection: 'row' }]}>
+                            <LibreBaskerville style={[styles.releaseDate, styles.text]}>{release_year(releaseDate)}</LibreBaskerville>
+                            <View style={[styles.text, styles.rating]}>
                                 <MaterialIcons name="star" size={18} color={YELLOW_200}/>
-                                <LibreBaskerville style={{marginLeft: moderateScale(3)}}>{rating}</LibreBaskerville>
+                                <LibreBaskerville style={{marginLeft: moderateScale(3), color: PRIMARY_DARK}}>{rating}</LibreBaskerville>
 
                             </View>
                         </View>
-
-
                         <View style={{ flexDirection: 'row' }}>
                             {movieType(isAdult)}
-                            <LibreBaskerville style={styles.language}>{language}</LibreBaskerville>
+                            <LibreBaskerville style={[styles.language, styles.text]}>{language}</LibreBaskerville>
                         </View>
                     </View>
 
@@ -69,33 +67,32 @@ const styles = StyleSheet.create({
 
     },
     image: {
-        backgroundColor: PURPLE_500,
+        backgroundColor: MAIN_COLOR,
         height: heightPercentageToDP(30),
         width: widthPercentageToDP(40),
         borderRadius: moderateScale(5)
     },
     textTitle: {
         fontSize: moderateScale(15),
-        color: BROWN_700,
+        color: PURPLE_100,
         marginBottom: moderateScale(10)
+    },
+    text: {
+        fontSize: moderateScale(13),
+        color: PRIMARY_DARK,
+        marginBottom: moderateScale(10),
+        padding: moderateScale(10),
+        borderRadius: moderateScale(5),
+        backgroundColor: SECONDARY_DARK,
     },
     rating: {
         fontSize: moderateScale(20),
-        color: BLACK,
-        marginBottom: moderateScale(10),
-        padding: moderateScale(10),
         width: moderateScale(60),
-        borderRadius: moderateScale(5),
-        backgroundColor: GREEN_300,
+        alignSelf: 'center',
+        flexDirection: 'row'
     },
     releaseDate: {
-        fontSize: moderateScale(13),
-        color: BLACK,
-        marginBottom: moderateScale(10),
-        padding: moderateScale(10),
         width: moderateScale(55),
-        borderRadius: moderateScale(5),
-        backgroundColor: GREEN_300,
         marginEnd: moderateScale(10),
         textAlign: 'center'
     },
@@ -103,17 +100,11 @@ const styles = StyleSheet.create({
         padding: moderateScale(10),
         width: moderateScale(80),
         borderRadius: moderateScale(5),
-        backgroundColor: GREEN_400,
-        alignSelf: 'center'
+        backgroundColor: SECONDARY_DARK,
+        alignSelf: 'center',
     },
     language: {
-        fontSize: moderateScale(13),
-        color: BLACK,
-        marginBottom: moderateScale(10),
-        padding: moderateScale(10),
         width: moderateScale(40),
-        borderRadius: moderateScale(5),
-        backgroundColor: GREEN_300,
         marginStart: moderateScale(10),
         textAlign: 'center'
     },

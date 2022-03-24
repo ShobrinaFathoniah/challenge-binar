@@ -1,33 +1,23 @@
 import { View, StatusBar, FlatList, ScrollView, TouchableOpacity, Alert, BackHandler } from 'react-native'
-import { MAIN_COLOR, PURPLE_100, PURPLE_500 } from '../../utils/colors'
-import { Amita, MiniCard, LibreBaskerville, MediumCard } from '../../components'
-import { BASE_URL, ACCESS_TOKEN, IMAGE_URL } from '@env'
+import { PRIMARY_DARK } from '../../utils/colors'
+import { Amita, MiniCard, LibreBaskerville, MediumCard, LoadingBar, RecommendedCard } from '../../components'
+import { BASE_URL } from '@env'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import style from './style'
-import * as Progress from 'react-native-progress';
 
 const Home = ({ navigation }) => {
-    // API masih belum sesuai
     const [listRecommended, setListRecommended] = useState([])
     const [listLatest, setListLatest] = useState([])
     const [isLoading, setIsLoading] = useState(false);
 
-    // loadingBar
-    const loadingBar = loading => {
-        if (loading) {
-            return (
-                <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
-                    <Progress.CircleSnail size={80} indeterminate={true} thickness={5} color={PURPLE_500} />
-                </View>
-            )
-        } else {
-            return (null)
-        }
-    }
+    useEffect(() => {
+        getMovies()
+        exit()
+    }, [])
 
     // tombol exit 
-    useEffect(() => {
+    const exit = () => {
         const backAction = () => {
             Alert.alert("Hold on!", "Do you want to exit the application?", [
                 {
@@ -46,33 +36,14 @@ const Home = ({ navigation }) => {
         );
 
         return () => backHandler.remove();
-    }, [])
+    }
 
-    useEffect(() => {
-        getRecommendedMovie()
-        getLatestMovie()
-    }, [])
-
-    const getRecommendedMovie = async () => {
+    const getMovies = async () => {
         setIsLoading(true)
         try {
             const results = await axios.get(`${BASE_URL}/movies`)
             console.log(results);
             setListRecommended(results.data.results)
-            setIsLoading(false)
-        } catch (error) {
-            setIsLoading(false)
-            console.log(error);
-        }
-    }
-
-    const getLatestMovie = async () => {
-        setIsLoading(true)
-        try {
-            const results = await axios.get(`${BASE_URL}/movies`)
-            console.log(results);
-            const data = results.data.results
-
             setListLatest(results.data.results)
             setIsLoading(false)
         } catch (error) {
@@ -88,7 +59,7 @@ const Home = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate("Detail", {
                 params: { idMovie }
             })}>
-                <MiniCard image={`${item.poster_path}`} />
+                <RecommendedCard image={item.backdrop_path} text={item.title} />
             </TouchableOpacity>
         )
     })
@@ -100,14 +71,28 @@ const Home = ({ navigation }) => {
             <TouchableOpacity onPress={() => navigation.navigate("Detail", {
                 params: { idMovie }
             })}>
-                <MediumCard image={`${item.poster_path}`} title={item.title} rating={item.vote_average} releaseDate={item.release_date} language={item.original_language} adult={item.adult} />
+                <MediumCard image={item.poster_path} title={item.title} rating={item.vote_average} releaseDate={item.release_date} language={item.original_language} adult={item.adult} />
             </TouchableOpacity>
         )
     })
 
+    //latestUpdated
+    const latest = listLatest.sort(function (a, b) {
+        return new Date(b.release_date) - new Date(a.release_date)
+    })
+    // console.log(latest);
+
+    //recommended
+    const recommended = listRecommended.filter(function (item) {
+        return item.vote_average >= 5
+    }).sort(function (a, b) {
+        return b.vote_average - a.vote_average
+    })
+    // console.log(recommended);
+
     return (
         <ScrollView style={style.mainPage}>
-            <StatusBar barStyle="dark-content" backgroundColor={PURPLE_100} />
+            <StatusBar barStyle="light-content" backgroundColor={PRIMARY_DARK} />
 
             {/* Judul Apps */}
             <Amita style={style.appName}>Livies</Amita>
@@ -117,33 +102,29 @@ const Home = ({ navigation }) => {
                 <LibreBaskerville style={style.subTitle}>Recommended</LibreBaskerville>
                 <View style={style.cardHorizontal}>
                     <FlatList
-                        data={listRecommended}
+                        data={recommended}
                         numColumns={1}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         keyExtractor={(_item, index) => index}
                         renderItem={recommendedMovie} />
-
                 </View>
-                {loadingBar(isLoading)}
+                {LoadingBar(isLoading)}
             </View>
-
 
             {/* Latest Movie */}
             <View>
                 <LibreBaskerville style={style.subTitle}>Latest Updated</LibreBaskerville>
                 <View style={style.cardVertical}>
                     <FlatList
-                        data={listLatest}
+                        data={latest}
                         keyExtractor={(_item, index) => index}
                         showsVerticalScrollIndicator={false}
                         scrollEnabled={false}
                         renderItem={latestMovie} />
-
                 </View>
-                {loadingBar(isLoading)}
+                {LoadingBar(isLoading)}
             </View>
-
         </ScrollView>
     )
 }

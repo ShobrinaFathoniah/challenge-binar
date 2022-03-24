@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
-import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
+import { heightPercentageToDP } from 'react-native-responsive-screen'
 import { moderateScale } from 'react-native-size-matters'
-import { PINK_200, MAIN_COLOR, PURPLE_200, PURPLE_300, BLACK, BROWN_700, PURPLE_100, PURPLE_400, PURPLE_500, BROWN_300 } from '../../utils/colors'
+import { PINK_200, MAIN_COLOR, PURPLE_100, PURPLE_500, PRIMARY_DARK, SECONDARY_DARK } from '../../utils/colors'
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -9,13 +9,13 @@ const windowWidth = Dimensions.get('window').width;
 const style = StyleSheet.create({
     mainPage: {
         flex: 1,
-        backgroundColor: PURPLE_100,
+        backgroundColor: PRIMARY_DARK,
     },
     backdrop: {
         width: moderateScale(windowWidth),
         height: heightPercentageToDP(30),
         resizeMode: 'cover',
-        backgroundColor: PURPLE_200,
+        backgroundColor: SECONDARY_DARK,
     },
     allButtons: {
         flexDirection: 'row',
@@ -31,7 +31,7 @@ const style = StyleSheet.create({
     },
     title: {
         fontSize: moderateScale(18),
-        color: BROWN_700
+        color: MAIN_COLOR
     },
     container: {
         marginTop: moderateScale(10)
@@ -44,15 +44,14 @@ const style = StyleSheet.create({
         backgroundColor: PINK_200,
         padding: moderateScale(10),
         borderRadius: moderateScale(10),
-        color: BROWN_700
     },
     synopshisContainer: {
         marginHorizontal: moderateScale(15)
     },
     synopshis: {
         margin: moderateScale(10),
-        fontSize: moderateScale(18),
-        color: BROWN_700,
+        fontSize: moderateScale(20),
+        color: PURPLE_100,
         textAlign: 'justify'
     },
     listArtist: {
@@ -72,11 +71,11 @@ const style = StyleSheet.create({
 
     },
     btnText: {
-        color: PURPLE_100,
+        color: PRIMARY_DARK,
         fontSize: moderateScale(15)
     },
     text: {
-        color: BLACK
+        color: MAIN_COLOR
     }
 })
 

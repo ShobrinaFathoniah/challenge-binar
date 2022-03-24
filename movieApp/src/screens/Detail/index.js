@@ -1,13 +1,12 @@
-import { View, StatusBar, ImageBackground, ScrollView, Text, Share, FlatList, TouchableOpacity } from 'react-native'
+import { View, StatusBar, ImageBackground, ScrollView, Share, FlatList, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import style from './style'
 import axios from 'axios'
 import { CommonActions } from '@react-navigation/native';
-import { ButtonCircle, DetailCard, LibreBaskerville, MiniCard, Rancho } from '../../components'
-import { MAIN_COLOR, PURPLE_100, PURPLE_500 } from '../../utils/colors'
+import { ButtonCircle, DetailCard, LibreBaskerville, LoadingBar, MiniCard, Rancho } from '../../components'
+import { PRIMARY_DARK } from '../../utils/colors'
 import { BASE_URL } from '@env'
 import { moderateScale } from 'react-native-size-matters'
-import * as Progress from 'react-native-progress';
 import moment from 'moment';
 
 const Detail = ({ route, navigation }) => {
@@ -22,19 +21,6 @@ const Detail = ({ route, navigation }) => {
   const [lengthCastArtist, setLengthCastArtist] = useState(0);
 
   const release_date = moment(detailMovie.releaseDate).format('DD MMMM YYYY')
-
-  //loading bar
-  const loadingBar = (loading) => {
-    if (loading) {
-      return (
-        <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
-          <Progress.CircleSnail size={80} indeterminate={true} thickness={5} color={PURPLE_500} />
-        </View>
-      )
-    } else {
-      return (null)
-    }
-  }
 
   const getDetailMovie = async () => {
     setIsLoading(true)
@@ -67,7 +53,7 @@ const Detail = ({ route, navigation }) => {
   const genres = (({ item }) => {
     return (
       <View style={style.genre}>
-        <LibreBaskerville>{item.name}</LibreBaskerville>
+        <LibreBaskerville style={{color: PRIMARY_DARK}}>{item.name}</LibreBaskerville>
       </View>
     )
   })
@@ -117,7 +103,7 @@ const Detail = ({ route, navigation }) => {
 
   return (
     <ScrollView style={style.mainPage}>
-      <StatusBar barStyle="dark-content" backgroundColor={PURPLE_100} />
+      <StatusBar barStyle="light-content" backgroundColor={PRIMARY_DARK} />
 
       {/* Header */}
       <View>
@@ -139,7 +125,7 @@ const Detail = ({ route, navigation }) => {
         <DetailCard urlImage={detailMovie.poster_path} title={detailMovie.title} releaseDate={detailMovie.release_date} voting={detailMovie.vote_average} tagLine={detailMovie.tagline} status={detailMovie.status} runtime={detailMovie.runtime} />
       </View>
 
-      {loadingBar(isLoading)}
+      {LoadingBar(isLoading)}
 
       <View style={style.container}>
         {/* Genres */}

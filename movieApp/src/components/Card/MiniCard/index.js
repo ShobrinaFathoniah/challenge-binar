@@ -2,20 +2,34 @@ import { StyleSheet, View, Image } from 'react-native'
 import React from 'react'
 import { Rancho } from '../../Fonts'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
-import { BROWN_700, PURPLE_400 } from '../../../utils/colors'
+import { MAIN_COLOR, SECONDARY_DARK } from '../../../utils/colors'
 import { moderateScale } from 'react-native-size-matters'
+import { URL_NOT_IMAGE } from '@env'
 
 export default function MiniCard({ image, text }) {
-    return (
-        <View style={styles.card}>
-            <View>
-                <Image style={styles.image} source={{ uri: `${image}` }} />
+    if (image === "https://image.tmdb.org/t/p/w500null") {
+        return (
+            <View style={styles.card}>
                 <View>
-                    <Rancho style={styles.text}>{text}</Rancho>
+                    <Image style={styles.image} source={{ uri: URL_NOT_IMAGE }} />
+                    <View>
+                        <Rancho style={styles.text}>{text}</Rancho>
+                    </View>
                 </View>
             </View>
-        </View>
-    )
+        )
+    } else {
+        return (
+            <View style={styles.card}>
+                <View>
+                    <Image style={styles.image} source={{ uri: image }} />
+                    <View>
+                        <Rancho style={styles.text}>{text}</Rancho>
+                    </View>
+                </View>
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -27,14 +41,14 @@ const styles = StyleSheet.create({
         height: heightPercentageToDP(30),
         width: widthPercentageToDP(40),
         borderRadius: moderateScale(5),
-        backgroundColor: PURPLE_400,
+        backgroundColor: SECONDARY_DARK,
     },
     text: {
-        fontSize: moderateScale(17),
+        fontSize: moderateScale(18),
         marginTop: moderateScale(5),
         alignSelf: 'center',
         textAlign: 'center',
         paddingHorizontal: moderateScale(3),
-        color: BROWN_700
+        color: MAIN_COLOR
     }
 })

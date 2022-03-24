@@ -1,20 +1,20 @@
 import { StyleSheet } from 'react-native'
 import { moderateScale } from 'react-native-size-matters'
-import { BLACK, WHITE } from '../../utils/colors'
+import { MAIN_COLOR, PRIMARY_DARK } from '../../utils/colors'
 
 const style = StyleSheet.create({
     mainPage: {
         flex:1,
-        backgroundColor: WHITE
+        backgroundColor: PRIMARY_DARK
     },
     appName: {
-        color: BLACK,
+        color: MAIN_COLOR,
         fontSize: moderateScale(30),
         alignSelf: 'center',
         marginTop: moderateScale(10)
     },
     subTitle: {
-        color: BLACK,
+        color: MAIN_COLOR,
         fontSize: moderateScale(18),
         margin: moderateScale(10)
     },

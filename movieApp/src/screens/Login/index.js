@@ -1,31 +1,17 @@
-import { StatusBar, Image, ScrollView, SafeAreaView, TouchableOpacity, TextInput, Alert, View } from 'react-native'
+import { StatusBar, ScrollView, SafeAreaView, TouchableOpacity, Image, TextInput, Alert } from 'react-native'
 import React, { useState } from 'react'
-import { GREEN_700, MAIN_COLOR, PURPLE_500 } from '../../utils/colors'
+import { MAIN_COLOR, PRIMARY_DARK, YELLOW_200 } from '../../utils/colors'
 import styles from './style'
 import axios from 'axios'
-import { LibreBaskerville } from '../../components'
-import { Logo } from '../../assets'
+import { Amita, LibreBaskerville, LoadingBar, Rancho } from '../../components'
 import { BASE_URL_STORE } from '@env'
-import * as Progress from 'react-native-progress';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import { LoginPic } from '../../assets'
 
 const Login = ({ navigation }) => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false);
-
-  // loadingBar
-  const loadingBar = loading => {
-    if (loading) {
-      return (
-        <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
-          <Progress.CircleSnail size={80} indeterminate={true} thickness={5} color={PURPLE_500} />
-        </View>
-      )
-    } else {
-      return (null)
-    }
-  }
-
 
   const dataUser = {
     username: username, //mor_2314
@@ -86,10 +72,19 @@ const Login = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.page}>
-      <StatusBar barStyle="dark-content" backgroundColor={MAIN_COLOR} />
+      <StatusBar barStyle="light-content" backgroundColor={PRIMARY_DARK} />
 
-      {/* Logo */}
-      <Image source={Logo} style={styles.logo} />
+      {/* appNamw */}
+      <Amita style={styles.appName}>Livies</Amita>
+
+      <SafeAreaView style={styles.star}>
+        <MaterialIcons name='star' size={25} color={YELLOW_200} />
+        <MaterialIcons name='star' size={25} color={YELLOW_200} />
+        <MaterialIcons name='star' size={25} color={YELLOW_200} />
+      </SafeAreaView>
+      <Rancho style={styles.login}>Login</Rancho>
+
+      <Image source={LoginPic} style={styles.image} />
 
       {/* Input */}
       <SafeAreaView style={styles.containerInput}>
@@ -98,30 +93,33 @@ const Login = ({ navigation }) => {
           onChangeText={(value) => setUsername(value)}
           value={username}
           placeholder="Username"
+          placeholderTextColor={MAIN_COLOR}
         />
         <TextInput
           style={styles.input}
           onChangeText={(value) => setPassword(value)}
           value={password}
           placeholder="Password"
+          placeholderTextColor={MAIN_COLOR}
           secureTextEntry={true}
         />
       </SafeAreaView>
 
       {/* Button */}
-      <SafeAreaView style={styles.allButton}>
-        {/* registrasi */}
-        <TouchableOpacity style={[styles.button, { backgroundColor: GREEN_700 }]} onPress={() => navigation.navigate("Registrasi")}>
-          <LibreBaskerville style={styles.buttonText}>Registrasi</LibreBaskerville>
-        </TouchableOpacity>
+      {/* goes to login */}
+      <TouchableOpacity style={styles.button} onPress={login}>
+        <LibreBaskerville style={styles.buttonText}>Login</LibreBaskerville>
+      </TouchableOpacity>
 
-        {/* goes to login */}
-        <TouchableOpacity style={styles.button} onPress={login}>
-          <LibreBaskerville style={styles.buttonText}>Login</LibreBaskerville>
+      {/* registrasi */}
+      <SafeAreaView style={styles.texts}>
+        <LibreBaskerville style={styles.text}>Not Have an Account? </LibreBaskerville>
+        <TouchableOpacity onPress={() => navigation.navigate("Registrasi")}>
+          <LibreBaskerville style={[styles.text, styles.textRegis]}>Registrasi</LibreBaskerville>
         </TouchableOpacity>
       </SafeAreaView>
-      
-      {loadingBar(isLoading)}
+
+      {LoadingBar(isLoading)}
     </ScrollView>
   )
 }

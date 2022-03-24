@@ -4,12 +4,12 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { moderateScale } from 'react-native-size-matters'
 import { BLACK, PURPLE_300 } from '../../../utils/colors'
 
-const ButtonCircle = ({style, nameIcon, onPress}) => {
+const ButtonCircle = ({style, nameIcon, onPress, size=18, color=BLACK}) => {
   const passedStyles = Array.isArray(style) ? Object.assign({}, ...style) : style
 
   return (
     <TouchableOpacity onPress={onPress} style={[styles.circle, { ...passedStyles }]}>
-      <FontAwesome style={{ alignSelf: 'center' }} name={nameIcon} color={BLACK} size={18} />
+      <FontAwesome style={{ alignSelf: 'center' }} name={nameIcon} color={color} size={size} />
     </TouchableOpacity>
   )
 }

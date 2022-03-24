@@ -1,47 +1,96 @@
 import { StyleSheet } from 'react-native'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { moderateScale } from 'react-native-size-matters'
-import { GREEN_200, GREEN_700, MAIN_COLOR, PURPLE_100, PURPLE_400, PURPLE_500, WHITE } from '../../utils/colors'
+import { MAIN_COLOR, PRIMARY_DARK, YELLOW_200 } from '../../utils/colors'
 
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-        backgroundColor: PURPLE_100
+        backgroundColor: PRIMARY_DARK
     },
-    logo: {
+    signUp: {
+        fontSize: moderateScale(40),
+        color: MAIN_COLOR,
         alignSelf: 'center',
+        margin: moderateScale(10),
+        letterSpacing: moderateScale(3),
+        marginTop: moderateScale(-15)
+    },
+    appName: {
+        fontSize: moderateScale(25),
+        color: MAIN_COLOR,
+        marginStart:moderateScale(15)
+    },
+    image:{
+        width: widthPercentageToDP(20),
+        height: heightPercentageToDP(10),
         resizeMode: 'contain',
-        width: widthPercentageToDP(50)
+        flex: 1,
+        marginEnd: moderateScale(5)
+    },
+    pic:{
+        width: widthPercentageToDP(15),
+        height: heightPercentageToDP(10),
+        resizeMode: 'contain',
+    },
+    rowInput: {
+        flexDirection: 'row'
+    },
+    text: { 
+        color: MAIN_COLOR, 
+        fontSize: moderateScale(14), 
     },
     input: {
-        width: moderateScale(272),
-        height: moderateScale(46),
-        marginBottom: moderateScale(12),
-        borderWidth: moderateScale(4),
+        flex: 1,
+        width: moderateScale(170),
+        marginBottom: moderateScale(15),
+        borderBottomWidth: moderateScale(1),
         padding: moderateScale(10),
-        borderColor: PURPLE_500,
-        color: PURPLE_400,
-        borderRadius: moderateScale(5)
+        borderColor: MAIN_COLOR,
+        borderRadius: moderateScale(5),
+        marginTop: moderateScale(5),
+        color: MAIN_COLOR
+    },
+    perInput: {
+        marginStart: moderateScale(10)
     },
     containerInput: {
-        justifyContent: 'center',
-        alignItems: 'center'
+        margin: moderateScale(10)
     },
     button: {
         padding: moderateScale(10),
         borderRadius: moderateScale(3),
         alignSelf: 'center',
-        backgroundColor: PURPLE_500,
-        margin: moderateScale(10)
+        backgroundColor: MAIN_COLOR,
+        margin: moderateScale(10),
+        width: moderateScale(340),
     },
     buttonText: {
         alignSelf: 'center',
-        color: PURPLE_100,
+        color: PRIMARY_DARK,
     },
     allButton: {
         flexDirection: 'row',
         alignSelf: 'center',
-    }
+    },
+    star:{
+        flexDirection: 'row',
+        alignSelf:'center',
+        marginBottom: moderateScale(5)
+    },
+    texts: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        marginBottom: moderateScale(30)
+    },
+    text: {
+        color: MAIN_COLOR,
+        fontSize: moderateScale(15),
+        marginTop:moderateScale(10)
+    },
+    textRegis: {
+        color: YELLOW_200
+    },
 })
 
 export default styles

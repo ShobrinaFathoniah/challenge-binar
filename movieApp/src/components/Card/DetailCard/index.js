@@ -1,7 +1,7 @@
 import { StyleSheet, View, Image } from 'react-native'
 import React from 'react'
 import { moderateScale } from 'react-native-size-matters'
-import { BLACK, BROWN_700, GREEN_700, PURPLE_100, PURPLE_200, PURPLE_500 } from '../../../utils/colors'
+import { PRIMARY_DARK, PURPLE_200_SDW } from '../../../utils/colors'
 import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 import { LibreBaskerville } from '../../Fonts'
 import { release_date } from '../../../utils/changeDate'
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: widthPercentageToDP(90),
         height: moderateScale(180),
-        backgroundColor: PURPLE_200,
+        backgroundColor: PURPLE_200_SDW,
         borderRadius: moderateScale(10),
         alignSelf: 'center',
 
@@ -56,11 +56,11 @@ const styles = StyleSheet.create({
         margin: moderateScale(5)
     },
     text: {
-        color: BLACK,
+        color: PRIMARY_DARK,
         marginBottom: moderateScale(5)
     },
     releaseDate: {
-        color:BLACK,
+        color:PRIMARY_DARK,
 
     }
     
