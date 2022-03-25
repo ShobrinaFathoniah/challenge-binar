@@ -1,5 +1,5 @@
-import MiniCard from "./MiniCard";
-import MediumCard from "./MediumCard";
-import RecommendedCard from "./RecommendedCard";
+import MiniCard from './MiniCard';
+import MediumCard from './MediumCard';
+import RecommendedCard from './RecommendedCard';
 
-export { MiniCard, MediumCard, RecommendedCard }
+export {MiniCard, MediumCard, RecommendedCard};

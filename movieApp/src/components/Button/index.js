@@ -1,3 +1,3 @@
-import ButtonCircle from "./ButtonCircle";
+import ButtonCircle from './ButtonCircle';
 
-export { ButtonCircle }
+export {ButtonCircle};

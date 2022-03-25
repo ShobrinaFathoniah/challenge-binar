@@ -1,18 +1,18 @@
-import { NavigationContainer, Image } from '@react-navigation/native';
-import React, { useEffect } from 'react'
+import {NavigationContainer} from '@react-navigation/native';
+import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import Router from './src/routers';
 
 const App = () => {
   useEffect(() => {
-    SplashScreen.hide()
-  }, [])
+    SplashScreen.hide();
+  }, []);
 
   return (
     <NavigationContainer>
       <Router />
     </NavigationContainer>
-  )
-}
+  );
+};
 
-export default App
+export default App;

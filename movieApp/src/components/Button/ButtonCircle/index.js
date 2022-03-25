@@ -1,20 +1,29 @@
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import React from 'react'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { moderateScale } from 'react-native-size-matters'
-import { BLACK, PURPLE_300 } from '../../../utils/colors'
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import React from 'react';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {moderateScale} from 'react-native-size-matters';
+import {BLACK, PURPLE_300} from '../../../utils/colors';
 
-const ButtonCircle = ({style, nameIcon, onPress, size=18, color=BLACK}) => {
-  const passedStyles = Array.isArray(style) ? Object.assign({}, ...style) : style
+const ButtonCircle = ({style, nameIcon, onPress, size = 18, color = BLACK}) => {
+  const passedStyles = Array.isArray(style)
+    ? Object.assign({}, ...style)
+    : style;
 
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.circle, { ...passedStyles }]}>
-      <FontAwesome style={{ alignSelf: 'center' }} name={nameIcon} color={color} size={size} />
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.circle, {...passedStyles}]}>
+      <FontAwesome
+        style={{alignSelf: 'center'}}
+        name={nameIcon}
+        color={color}
+        size={size}
+      />
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export default ButtonCircle
+export default ButtonCircle;
 
 const styles = StyleSheet.create({
   circle: {
@@ -23,6 +32,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: moderateScale(35),
     width: moderateScale(35),
-    backgroundColor: PURPLE_300
-  }
-})
+    backgroundColor: PURPLE_300,
+  },
+});
