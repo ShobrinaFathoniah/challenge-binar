@@ -15,6 +15,7 @@ import {
   MediumCard,
   LoadingBar,
   RecommendedCard,
+  NoConnection,
 } from '../../components';
 import {BASE_URL} from '@env';
 import React, {useState, useEffect} from 'react';
@@ -27,6 +28,7 @@ const Home = ({navigation}) => {
   const [listLatest, setListLatest] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [connection, setConnection] = useState(true);
 
   useEffect(() => {
     getMovies();
@@ -36,6 +38,15 @@ const Home = ({navigation}) => {
   const onRefresh = () => {
     setRefreshing(true);
     getMovies();
+  };
+
+  const internetChecker = () => {
+    NetInfo.fetch().then(state => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+
+      setConnection(state.isConnected);
+    });
   };
 
   // tombol exit
@@ -62,6 +73,7 @@ const Home = ({navigation}) => {
 
   const getMovies = async () => {
     setIsLoading(true);
+    internetChecker();
     try {
       const results = await axios.get(`${BASE_URL}/movies`);
       console.log(results);
@@ -129,6 +141,53 @@ const Home = ({navigation}) => {
   });
   // console.log(latest);
 
+  const tampilan = () => {
+    return (
+      <View>
+        {/* Recommended Movie */}
+        <View style={{flexDirection: 'column'}}>
+          <LibreBaskerville style={style.subTitle}>
+            Recommended
+          </LibreBaskerville>
+          <View style={style.cardHorizontal}>
+            <FlatList
+              data={recommended}
+              numColumns={1}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(_item, index) => index}
+              ListEmptyComponent={
+                <LibreBaskerville>No Data Found</LibreBaskerville>
+              }
+              renderItem={recommendedMovie}
+            />
+          </View>
+          {LoadingBar(isLoading)}
+        </View>
+
+        {/* Latest Movie */}
+        <View>
+          <LibreBaskerville style={style.subTitle}>
+            Latest Updated
+          </LibreBaskerville>
+          <View style={style.cardVertical}>
+            <FlatList
+              data={latest}
+              keyExtractor={(_item, index) => index}
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={false}
+              ListEmptyComponent={
+                <LibreBaskerville>No Data Found</LibreBaskerville>
+              }
+              renderItem={latestMovie}
+            />
+          </View>
+          {LoadingBar(isLoading)}
+        </View>
+      </View>
+    );
+  };
+
   return (
     <ScrollView
       style={style.mainPage}
@@ -140,44 +199,7 @@ const Home = ({navigation}) => {
       {/* Judul Apps */}
       <Amita style={style.appName}>Livies</Amita>
 
-      {/* Recommended Movie */}
-      <View style={{flexDirection: 'column'}}>
-        <LibreBaskerville style={style.subTitle}>Recommended</LibreBaskerville>
-        <View style={style.cardHorizontal}>
-          <FlatList
-            data={recommended}
-            numColumns={1}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(_item, index) => index}
-            ListEmptyComponent={
-              <LibreBaskerville>No Data Found</LibreBaskerville>
-            }
-            renderItem={recommendedMovie}
-          />
-        </View>
-        {LoadingBar(isLoading)}
-      </View>
-
-      {/* Latest Movie */}
-      <View>
-        <LibreBaskerville style={style.subTitle}>
-          Latest Updated
-        </LibreBaskerville>
-        <View style={style.cardVertical}>
-          <FlatList
-            data={latest}
-            keyExtractor={(_item, index) => index}
-            showsVerticalScrollIndicator={false}
-            scrollEnabled={false}
-            ListEmptyComponent={
-              <LibreBaskerville>No Data Found</LibreBaskerville>
-            }
-            renderItem={latestMovie}
-          />
-        </View>
-        {LoadingBar(isLoading)}
-      </View>
+      {connection ? tampilan() : NoConnection(connection)}
     </ScrollView>
   );
 };

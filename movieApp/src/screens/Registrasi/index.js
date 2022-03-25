@@ -7,27 +7,25 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  RefreshControl,
 } from 'react-native';
 import React, {useState} from 'react';
 import styles from './style';
 import axios from 'axios';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import NetInfo from '@react-native-community/netinfo';
+import {PRIMARY_DARK, PRIMARY_LIGHT, YELLOW_200} from '../../utils/colors';
 import {
-  MAIN_COLOR,
-  PRIMARY_DARK,
-  PRIMARY_LIGHT,
-  YELLOW_200,
-} from '../../utils/colors';
-import {Amita, LibreBaskerville, LoadingBar, Rancho} from '../../components';
+  Amita,
+  LibreBaskerville,
+  LoadingBar,
+  NoConnection,
+  Rancho,
+} from '../../components';
 import {BASE_URL_STORE} from '@env';
 import {checkEmail, isValidPassword} from '../../utils/validationData';
 import {moderateScale} from 'react-native-size-matters';
-import {AddresPic, NoInternetPic, PersonalPic, RegisPic} from '../../assets';
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from 'react-native-responsive-screen';
+import {AddresPic, PersonalPic, RegisPic} from '../../assets';
 
 const Registrasi = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -45,6 +43,8 @@ const Registrasi = ({navigation}) => {
   const [long, setLong] = useState('');
   const [phone, setPhone] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [connection, setConnection] = useState(true);
 
   const dataUser = {
     email: email,
@@ -67,42 +67,23 @@ const Registrasi = ({navigation}) => {
     phone: phone,
   };
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    internetChecker();
+  };
+
   const internetChecker = () => {
     NetInfo.fetch().then(state => {
       console.log('Connection type', state.type);
       console.log('Is connected?', state.isConnected);
 
-      if (!state.isConnected) {
-        return (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              backgroundColor: PRIMARY_DARK,
-            }}>
-            <Image
-              style={{
-                width: widthPercentageToDP(70),
-                height: heightPercentageToDP(40),
-                resizeMode: 'contain',
-                alignSelf: 'center',
-              }}
-              source={NoInternetPic}
-            />
-            <LibreBaskerville
-              style={{fontSize: 19, color: MAIN_COLOR, textAlign: 'center'}}>
-              Please Turn On your Internet Connection
-            </LibreBaskerville>
-          </View>
-        );
-      }
+      setConnection(state.isConnected);
+      setRefreshing(false);
     });
   };
 
   const registration = async () => {
     setIsLoading(true);
-    internetChecker();
-
     try {
       if (
         (email,
@@ -120,10 +101,9 @@ const Registrasi = ({navigation}) => {
       ) {
         if (password === confirmPassword) {
           if (checkEmail(email) && isValidPassword(password)) {
+            internetChecker();
             const res = await axios.post(`${BASE_URL_STORE}/users`, dataUser);
-
             console.log(res);
-
             Alert.alert('Pemberitahuan', 'Registration Berhasil', [
               {
                 text: 'OK',
@@ -160,8 +140,231 @@ const Registrasi = ({navigation}) => {
     }
   };
 
+  const tampilan = () => {
+    return (
+      <View>
+        {/* Input */}
+        <SafeAreaView
+          style={{flexDirection: 'row', marginStart: moderateScale(10)}}>
+          <Image source={PersonalPic} style={styles.pic} />
+          <LibreBaskerville
+            style={[
+              styles.text,
+              {
+                fontSize: moderateScale(20),
+                margin: moderateScale(15),
+                alignSelf: 'center',
+              },
+            ]}>
+            Personal Data
+          </LibreBaskerville>
+        </SafeAreaView>
+
+        <SafeAreaView style={styles.containerInput}>
+          <SafeAreaView style={styles.rowInput}>
+            <SafeAreaView>
+              <LibreBaskerville style={styles.text}>Email</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setEmail(value)}
+                value={email}
+                placeholder="Email"
+                textContentType="emailAddress"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+
+            <SafeAreaView style={styles.perInput}>
+              <LibreBaskerville style={styles.text}>Username</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setUsername(value)}
+                value={username}
+                placeholder="Username"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+          </SafeAreaView>
+
+          <SafeAreaView style={styles.rowInput}>
+            <SafeAreaView>
+              <LibreBaskerville style={styles.text}>Name</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setName(value)}
+                value={name}
+                placeholder="Name"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+            <SafeAreaView style={styles.perInput}>
+              <LibreBaskerville style={styles.text}>
+                Phone Number
+              </LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setPhone(value)}
+                value={phone}
+                placeholder="Your Number"
+                keyboardType="phone-pad"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+          </SafeAreaView>
+
+          <SafeAreaView style={styles.rowInput}>
+            <SafeAreaView>
+              <LibreBaskerville style={styles.text}>Password</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setPassword(value)}
+                value={password}
+                placeholder="Password"
+                secureTextEntry={true}
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+
+            <SafeAreaView style={styles.perInput}>
+              <LibreBaskerville style={styles.text}>
+                Confirm Password
+              </LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setConfirmPassword(value)}
+                value={confirmPassword}
+                placeholder="Confirm Password"
+                secureTextEntry={true}
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+          </SafeAreaView>
+
+          <SafeAreaView style={{flexDirection: 'row'}}>
+            <Image source={AddresPic} style={styles.pic} />
+            <LibreBaskerville
+              style={[
+                styles.text,
+                {
+                  fontSize: moderateScale(20),
+                  margin: moderateScale(15),
+                  alignSelf: 'center',
+                },
+              ]}>
+              Your Address
+            </LibreBaskerville>
+          </SafeAreaView>
+
+          <SafeAreaView style={styles.rowInput}>
+            <SafeAreaView>
+              <LibreBaskerville style={styles.text}>City</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setCity(value)}
+                value={city}
+                placeholder="City"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+
+            <SafeAreaView style={styles.perInput}>
+              <LibreBaskerville style={styles.text}>
+                House Number
+              </LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setNumber(value)}
+                value={number}
+                placeholder="Your House Number"
+                keyboardType="numeric"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+          </SafeAreaView>
+
+          <SafeAreaView style={styles.rowInput}>
+            <SafeAreaView>
+              <LibreBaskerville style={styles.text}>Street</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setStreet(value)}
+                value={street}
+                placeholder="Street"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+            <SafeAreaView style={styles.perInput}>
+              <LibreBaskerville style={styles.text}>ZipCode</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setZipcode(value)}
+                value={zipcode}
+                placeholder="ZipCode"
+                keyboardType="numeric"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+          </SafeAreaView>
+
+          <SafeAreaView style={styles.rowInput}>
+            <SafeAreaView>
+              <LibreBaskerville style={styles.text}>Latitude</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setLat(value)}
+                value={lat}
+                placeholder="Latitude"
+                keyboardType="numeric"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+
+            <SafeAreaView style={styles.perInput}>
+              <LibreBaskerville style={styles.text}>Longitude</LibreBaskerville>
+              <TextInput
+                style={styles.input}
+                onChangeText={value => setLong(value)}
+                value={long}
+                placeholder="Longitude"
+                keyboardType="numeric"
+                placeholderTextColor={PRIMARY_LIGHT}
+              />
+            </SafeAreaView>
+          </SafeAreaView>
+        </SafeAreaView>
+
+        {LoadingBar(isLoading)}
+
+        {/* Button */}
+        <View style={styles.allButton}>
+          {/* registrasi */}
+          <TouchableOpacity style={styles.button} onPress={registration}>
+            <LibreBaskerville style={styles.buttonText}>
+              Registrasi
+            </LibreBaskerville>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.texts}>
+          <LibreBaskerville style={styles.text}>
+            Have an Account?{' '}
+          </LibreBaskerville>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <LibreBaskerville style={[styles.text, styles.textRegis]}>
+              Login
+            </LibreBaskerville>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   return (
-    <ScrollView style={styles.page}>
+    <ScrollView
+      style={styles.page}
+      refreshControl={
+        <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
+      }>
       <StatusBar barStyle="light-content" backgroundColor={PRIMARY_DARK} />
 
       {/* appname */}
@@ -179,224 +382,12 @@ const Registrasi = ({navigation}) => {
           </SafeAreaView>
           <Rancho style={styles.signUp}>SignUp</Rancho>
         </SafeAreaView>
-
         <SafeAreaView>
           <Image source={RegisPic} style={styles.image} />
         </SafeAreaView>
       </SafeAreaView>
 
-      {/* Input */}
-      <SafeAreaView
-        style={{flexDirection: 'row', marginStart: moderateScale(10)}}>
-        <Image source={PersonalPic} style={styles.pic} />
-        <LibreBaskerville
-          style={[
-            styles.text,
-            {
-              fontSize: moderateScale(20),
-              margin: moderateScale(15),
-              alignSelf: 'center',
-            },
-          ]}>
-          Personal Data
-        </LibreBaskerville>
-      </SafeAreaView>
-
-      <SafeAreaView style={styles.containerInput}>
-        <SafeAreaView style={styles.rowInput}>
-          <SafeAreaView>
-            <LibreBaskerville style={styles.text}>Email</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setEmail(value)}
-              value={email}
-              placeholder="Email"
-              textContentType="emailAddress"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-
-          <SafeAreaView style={styles.perInput}>
-            <LibreBaskerville style={styles.text}>Username</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setUsername(value)}
-              value={username}
-              placeholder="Username"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-        </SafeAreaView>
-
-        <SafeAreaView style={styles.rowInput}>
-          <SafeAreaView>
-            <LibreBaskerville style={styles.text}>Name</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setName(value)}
-              value={name}
-              placeholder="Name"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-          <SafeAreaView style={styles.perInput}>
-            <LibreBaskerville style={styles.text}>
-              Phone Number
-            </LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setPhone(value)}
-              value={phone}
-              placeholder="Your Number"
-              keyboardType="phone-pad"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-        </SafeAreaView>
-
-        <SafeAreaView style={styles.rowInput}>
-          <SafeAreaView>
-            <LibreBaskerville style={styles.text}>Password</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setPassword(value)}
-              value={password}
-              placeholder="Password"
-              secureTextEntry={true}
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-
-          <SafeAreaView style={styles.perInput}>
-            <LibreBaskerville style={styles.text}>
-              Confirm Password
-            </LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setConfirmPassword(value)}
-              value={confirmPassword}
-              placeholder="Confirm Password"
-              secureTextEntry={true}
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-        </SafeAreaView>
-
-        <SafeAreaView style={{flexDirection: 'row'}}>
-          <Image source={AddresPic} style={styles.pic} />
-          <LibreBaskerville
-            style={[
-              styles.text,
-              {
-                fontSize: moderateScale(20),
-                margin: moderateScale(15),
-                alignSelf: 'center',
-              },
-            ]}>
-            Your Address
-          </LibreBaskerville>
-        </SafeAreaView>
-
-        <SafeAreaView style={styles.rowInput}>
-          <SafeAreaView>
-            <LibreBaskerville style={styles.text}>City</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setCity(value)}
-              value={city}
-              placeholder="City"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-
-          <SafeAreaView style={styles.perInput}>
-            <LibreBaskerville style={styles.text}>
-              House Number
-            </LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setNumber(value)}
-              value={number}
-              placeholder="Your House Number"
-              keyboardType="numeric"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-        </SafeAreaView>
-
-        <SafeAreaView style={styles.rowInput}>
-          <SafeAreaView>
-            <LibreBaskerville style={styles.text}>Street</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setStreet(value)}
-              value={street}
-              placeholder="Street"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-          <SafeAreaView style={styles.perInput}>
-            <LibreBaskerville style={styles.text}>ZipCode</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setZipcode(value)}
-              value={zipcode}
-              placeholder="ZipCode"
-              keyboardType="numeric"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-        </SafeAreaView>
-
-        <SafeAreaView style={styles.rowInput}>
-          <SafeAreaView>
-            <LibreBaskerville style={styles.text}>Latitude</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setLat(value)}
-              value={lat}
-              placeholder="Latitude"
-              keyboardType="numeric"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-
-          <SafeAreaView style={styles.perInput}>
-            <LibreBaskerville style={styles.text}>Longitude</LibreBaskerville>
-            <TextInput
-              style={styles.input}
-              onChangeText={value => setLong(value)}
-              value={long}
-              placeholder="Longitude"
-              keyboardType="numeric"
-              placeholderTextColor={PRIMARY_LIGHT}
-            />
-          </SafeAreaView>
-        </SafeAreaView>
-      </SafeAreaView>
-
-      {LoadingBar(isLoading)}
-
-      {/* Button */}
-      <View style={styles.allButton}>
-        {/* registrasi */}
-        <TouchableOpacity style={styles.button} onPress={registration}>
-          <LibreBaskerville style={styles.buttonText}>
-            Registrasi
-          </LibreBaskerville>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.texts}>
-        <LibreBaskerville style={styles.text}>
-          Have an Account?{' '}
-        </LibreBaskerville>
-        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-          <LibreBaskerville style={[styles.text, styles.textRegis]}>
-            Login
-          </LibreBaskerville>
-        </TouchableOpacity>
-      </View>
+      {connection ? tampilan() : NoConnection(connection)}
     </ScrollView>
   );
 };

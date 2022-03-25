@@ -1,13 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
-import {
-  Detail,
-  Home,
-  Login,
-  NoConnection,
-  Registrasi,
-  Welcome,
-} from '../screens';
+import {Detail, Home, Login, Registrasi, Welcome} from '../screens';
 
 const Stack = createStackNavigator();
 
@@ -37,11 +30,6 @@ const routers = () => {
       <Stack.Screen
         name="Detail"
         component={Detail}
-        options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="NoConnection"
-        component={NoConnection}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
