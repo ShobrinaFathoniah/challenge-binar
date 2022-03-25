@@ -45,7 +45,6 @@ const Rating = ({ rating }) => {
                 <MaterialIcons name='star' size={24} color={BROWN_700} />
                 <MaterialIcons name='star' size={24} color={BROWN_700} />
                 <MaterialIcons name='star' size={24} color={BROWN_700} />
-                <MaterialIcons name='star' size={24} color={BROWN_700} />
             </View>
         )
     } else if (ratingBagiDua < 2 && ratingBagiDua >= 1) {

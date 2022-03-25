@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import styles from './style'
 import axios from 'axios'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
-import { PRIMARY_DARK, PRIMARY_LIGHT, YELLOW_200 } from '../../utils/colors'
+import NetInfo from "@react-native-community/netinfo";
+import { MAIN_COLOR, PRIMARY_DARK, PRIMARY_LIGHT, YELLOW_200 } from '../../utils/colors'
 import { Amita, LibreBaskerville, LoadingBar, Rancho } from '../../components'
 import { BASE_URL_STORE } from '@env'
 import { checkEmail, isValidPassword } from '../../utils/validationData'
 import { moderateScale } from 'react-native-size-matters'
-import { AddresPic, PersonalPic, RegisPic } from '../../assets'
+import { AddresPic, NoInternetPic, PersonalPic, RegisPic } from '../../assets'
+import { heightPercentageToDP, widthPercentageToDP } from 'react-native-responsive-screen'
 
 const Registrasi = ({ navigation }) => {
 
@@ -49,13 +51,32 @@ const Registrasi = ({ navigation }) => {
     phone: phone
   }
 
+  const internetChecker = () => {
+    NetInfo.fetch().then(state => {
+      console.log("Connection type", state.type);
+      console.log("Is connected?", state.isConnected);
+
+      if (!state.isConnected) {
+        return (
+          <View style={{ flex: 1, justifyContent: 'center', backgroundColor: PRIMARY_DARK }}>
+            <Image style={{ width: widthPercentageToDP(70), height: heightPercentageToDP(40), resizeMode: 'contain', alignSelf: "center" }} source={NoInternetPic} />
+            <LibreBaskerville style={{ fontSize: 19, color: MAIN_COLOR, textAlign: 'center' }}>Please Turn On your Internet Connection</LibreBaskerville>
+          </View>
+        )
+      }
+    });
+  }
+
   const registration = async () => {
     setIsLoading(true)
+    internetChecker()
+
     try {
       if (email, username, password, confirmPassword, name, city, street, number, zipcode, lat, long, phone) {
         if (password === confirmPassword) {
           if (checkEmail(email) && isValidPassword(password)) {
             const res = await axios.post(`${BASE_URL_STORE}/users`, dataUser)
+
             console.log(res);
 
             Alert.alert('Pemberitahuan', 'Registration Berhasil', [
@@ -96,7 +117,7 @@ const Registrasi = ({ navigation }) => {
       Alert.alert('Pemberitahuan', `Error: Registrasi Gagal karena ${error}`)
     }
   }
-
+  
   return (
     <ScrollView style={styles.page}>
       <StatusBar barStyle="light-content" backgroundColor={PRIMARY_DARK} />

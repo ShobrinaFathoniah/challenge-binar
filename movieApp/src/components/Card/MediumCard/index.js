@@ -12,7 +12,6 @@ const MediumCard = ({ image, title, releaseDate, rating = 0, language, adult }) 
     const [isAdult, setAdult] = useState(adult)
 
     const movieType = (adult) => {
-
         if (adult) {
             return (
                 <View style={[styles.bubble, { backgroundColor: 'red', width: moderateScale(55), }]}>
@@ -27,8 +26,6 @@ const MediumCard = ({ image, title, releaseDate, rating = 0, language, adult }) 
             )
         }
     }
-
-    const rate = rating * 10
 
     return (
         <View style={style.page}>
@@ -63,7 +60,6 @@ export default MediumCard
 const styles = StyleSheet.create({
     page: {
         flex: 1,
-
     },
     image: {
         backgroundColor: MAIN_COLOR,

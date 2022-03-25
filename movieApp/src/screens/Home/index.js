@@ -1,8 +1,9 @@
-import { View, StatusBar, FlatList, ScrollView, TouchableOpacity, Alert, BackHandler } from 'react-native'
+import { View, StatusBar, FlatList, ScrollView, TouchableOpacity, RefreshControl, Alert, BackHandler } from 'react-native'
 import { PRIMARY_DARK } from '../../utils/colors'
 import { Amita, LibreBaskerville, MediumCard, LoadingBar, RecommendedCard } from '../../components'
 import { BASE_URL } from '@env'
 import React, { useState, useEffect } from 'react'
+import NetInfo from "@react-native-community/netinfo";
 import axios from 'axios'
 import style from './style'
 
@@ -10,11 +11,17 @@ const Home = ({ navigation }) => {
     const [listRecommended, setListRecommended] = useState([])
     const [listLatest, setListLatest] = useState([])
     const [isLoading, setIsLoading] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         getMovies()
         exit()
     }, [])
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        getMovies();
+    };
 
     // tombol exit 
     const exit = () => {
@@ -46,8 +53,10 @@ const Home = ({ navigation }) => {
             setListRecommended(results.data.results)
             setListLatest(results.data.results)
             setIsLoading(false)
+            setRefreshing(false)
         } catch (error) {
             setIsLoading(false)
+            setRefreshing(false)
             console.log(error);
         }
     }
@@ -91,14 +100,20 @@ const Home = ({ navigation }) => {
     // console.log(latest);
 
     return (
-        <ScrollView style={style.mainPage}>
+        <ScrollView
+            style={style.mainPage}
+            refreshControl={<RefreshControl
+                onRefresh={onRefresh}
+                refreshing={refreshing}
+            />}
+        >
             <StatusBar barStyle="light-content" backgroundColor={PRIMARY_DARK} />
 
             {/* Judul Apps */}
             <Amita style={style.appName}>Livies</Amita>
 
             {/* Recommended Movie */}
-            <View>
+            <View style={{flexDirection: 'column'}}>
                 <LibreBaskerville style={style.subTitle}>Recommended</LibreBaskerville>
                 <View style={style.cardHorizontal}>
                     <FlatList
@@ -107,6 +122,7 @@ const Home = ({ navigation }) => {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                         keyExtractor={(_item, index) => index}
+                        ListEmptyComponent={<LibreBaskerville>No Data Found</LibreBaskerville>}
                         renderItem={recommendedMovie} />
                 </View>
                 {LoadingBar(isLoading)}
@@ -121,6 +137,7 @@ const Home = ({ navigation }) => {
                         keyExtractor={(_item, index) => index}
                         showsVerticalScrollIndicator={false}
                         scrollEnabled={false}
+                        ListEmptyComponent={<LibreBaskerville>No Data Found</LibreBaskerville>}
                         renderItem={latestMovie} />
                 </View>
                 {LoadingBar(isLoading)}

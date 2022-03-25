@@ -5,7 +5,7 @@ import { MAIN_COLOR, PRIMARY_DARK } from '../../utils/colors'
 const style = StyleSheet.create({
     mainPage: {
         flex:1,
-        backgroundColor: PRIMARY_DARK
+        backgroundColor: PRIMARY_DARK,
     },
     appName: {
         color: MAIN_COLOR,
@@ -25,7 +25,7 @@ const style = StyleSheet.create({
     cardVertical:{
         marginBottom: moderateScale(10),
         marginEnd: moderateScale(10),
-        marginStart: moderateScale(20)
+        marginStart: moderateScale(20),
     }
 })
 

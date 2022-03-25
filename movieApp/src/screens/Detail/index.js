@@ -1,4 +1,4 @@
-import { View, StatusBar, ImageBackground, ScrollView, Share, Image, FlatList, TouchableOpacity } from 'react-native'
+import { View, StatusBar, ImageBackground, ScrollView, RefreshControl, Share, Image, FlatList, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import style from './style'
 import axios from 'axios'
@@ -19,6 +19,12 @@ const Detail = ({ route, navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [end, setEnd] = useState(6);
   const [lengthCastArtist, setLengthCastArtist] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    getDetailMovie();
+  };
 
   const getDetailMovie = async () => {
     setIsLoading(true)
@@ -36,11 +42,14 @@ const Detail = ({ route, navigation }) => {
       setLengthCastArtist(res.data.credits.cast.length)
 
       setIsLoading(false)
+      setRefreshing(false);
     } catch (error) {
       setIsLoading(false)
 
       console.log(error);
       console.log(idMovie);
+      setRefreshing(false);
+
     }
   }
 
@@ -100,7 +109,13 @@ const Detail = ({ route, navigation }) => {
   };
 
   return (
-    <ScrollView style={style.mainPage}>
+    <ScrollView
+      style={style.mainPage}
+      refreshControl={<RefreshControl
+        onRefresh={onRefresh}
+        refreshing={refreshing}
+      />}
+    >
       <StatusBar barStyle="light-content" backgroundColor={PRIMARY_DARK} />
 
       {/* Header */}
@@ -119,7 +134,7 @@ const Detail = ({ route, navigation }) => {
       </View>
 
       {/* Konten */}
-      <View style={style.detailCard} >
+      <View style={style.detailCard}>
         <View style={style.containerPoster}>
           <Image source={{ uri: detailMovie.poster_path }} style={style.image} />
           <LibreBaskerville style={style.textTitle}>{detailMovie.title}</LibreBaskerville>
@@ -133,23 +148,20 @@ const Detail = ({ route, navigation }) => {
           <LibreBaskerville style={style.tagline} type="Italic">`{detailMovie.tagline}`</LibreBaskerville>
         </View>
 
-        <View style={{flexDirection: 'row', marginRight: moderateScale(10), alignSelf: 'center'}}>
+        <View style={{ flexDirection: 'row', marginRight: moderateScale(10), alignSelf: 'center' }}>
           <View style={style.containerTextDetail}>
             <LibreBaskerville style={style.textDetail}>Status</LibreBaskerville>
-            <LibreBaskerville style={[style.textDetail, {color: PINK_200}]}>{detailMovie.status}</LibreBaskerville>
+            <LibreBaskerville style={[style.textDetail, { color: PINK_200 }]}>{detailMovie.status}</LibreBaskerville>
           </View>
           <View style={style.containerTextDetail}>
             <LibreBaskerville style={style.textDetail}>Release Date</LibreBaskerville>
-            <LibreBaskerville style={[style.textDetail, {color: PINK_200}]}>{release_date(detailMovie.release_date)}</LibreBaskerville>
+            <LibreBaskerville style={[style.textDetail, { color: PINK_200 }]}>{release_date(detailMovie.release_date)}</LibreBaskerville>
           </View>
           <View style={style.containerTextDetail}>
             <LibreBaskerville style={style.textDetail}>Runtime</LibreBaskerville>
-            <LibreBaskerville type='Bold' style={[style.textDetail, {color: PINK_200}]}>{detailMovie.runtime} minutes</LibreBaskerville>
+            <LibreBaskerville type='Bold' style={[style.textDetail, { color: PINK_200 }]}>{detailMovie.runtime} minutes</LibreBaskerville>
           </View>
         </View>
-
-
-        {/* <DetailCard urlImage={detailMovie.poster_path} title={detailMovie.title} releaseDate={detailMovie.release_date} voting={detailMovie.vote_average} tagLine={detailMovie.tagline} status={detailMovie.status} runtime={detailMovie.runtime} /> */}
       </View>
 
       {LoadingBar(isLoading)}
@@ -169,7 +181,7 @@ const Detail = ({ route, navigation }) => {
         {/* Synopsis */}
         <View style={style.synopshisContainer}>
           <LibreBaskerville style={style.title}>Synopsis</LibreBaskerville>
-          <Rancho style={[style.synopshis, {letterSpacing: 0.2}]}>{detailMovie.overview}</Rancho>
+          <Rancho style={style.synopshis}>{detailMovie.overview}</Rancho>
         </View>
       </View>
 

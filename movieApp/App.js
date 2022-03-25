@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, Image } from '@react-navigation/native';
 import React, { useEffect } from 'react'
 import SplashScreen from 'react-native-splash-screen';
 import Router from './src/routers';
