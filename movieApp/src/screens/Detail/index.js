@@ -27,19 +27,32 @@ import {BASE_URL} from '@env';
 import {moderateScale} from 'react-native-size-matters';
 import {release_date} from '../../utils/changeDate';
 import NetInfo from '@react-native-community/netinfo';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  setDetailMovie,
+  setGenres,
+  setArtist,
+  setLengthCastArtist,
+} from './redux/action';
 
 const Detail = ({route, navigation}) => {
   const {params} = route.params;
   const idMovie = params.idMovie;
 
-  const [detailMovie, setDetailMovie] = useState({});
-  const [listGenre, setListGenre] = useState([]);
-  const [listArtist, setListArtist] = useState([]);
+  // const [detailMovie, setDetailMovie] = useState({});
+  // const [listGenre, setListGenre] = useState([]);
+  // const [listArtist, setListArtist] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [end, setEnd] = useState(6);
-  const [lengthCastArtist, setLengthCastArtist] = useState(0);
+  // const [lengthCastArtist, setLengthCastArtist] = useState(0);
   const [connection, setConnection] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+
+  //dispatch
+  const dispatch = useDispatch();
+  const {detailMovie, listGenre, listArtist, lengthCastArtist} = useSelector(
+    state => state.detail,
+  );
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -66,10 +79,10 @@ const Detail = ({route, navigation}) => {
       console.log(res);
       console.log(res.data.credits.cast.length);
 
-      setDetailMovie(res.data);
-      setListGenre(res.data.genres);
-      setListArtist(res.data.credits.cast);
-      setLengthCastArtist(res.data.credits.cast.length);
+      dispatch(setDetailMovie(res.data));
+      dispatch(setGenres(res.data.genres));
+      dispatch(setArtist(res.data.credits.cast));
+      dispatch(setLengthCastArtist(res.data.credits.cast.length));
 
       setIsLoading(false);
       setRefreshing(false);

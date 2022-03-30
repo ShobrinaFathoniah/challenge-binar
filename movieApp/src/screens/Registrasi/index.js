@@ -26,6 +26,8 @@ import {BASE_URL_STORE} from '@env';
 import {checkEmail, isValidPassword} from '../../utils/validationData';
 import {moderateScale} from 'react-native-size-matters';
 import {AddresPic, PersonalPic, RegisPic} from '../../assets';
+import {useDispatch} from 'react-redux';
+import {setDataRegister} from './redux/action';
 
 const Registrasi = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -42,9 +44,13 @@ const Registrasi = ({navigation}) => {
   const [lat, setLat] = useState('');
   const [long, setLong] = useState('');
   const [phone, setPhone] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [connection, setConnection] = useState(true);
+
+  //dispatch
+  const dispatch = useDispatch();
 
   const dataUser = {
     email: email,
@@ -103,6 +109,23 @@ const Registrasi = ({navigation}) => {
           if (checkEmail(email) && isValidPassword(password)) {
             internetChecker();
             const res = await axios.post(`${BASE_URL_STORE}/users`, dataUser);
+            dispatch(
+              setDataRegister({
+                email: email,
+                username: username,
+                password: password,
+                confirmPassword: confirmPassword,
+                name: name,
+                city: city,
+                street: street,
+                number: number,
+                zipcode: zipcode,
+                lat: lat,
+                long: long,
+                phone: phone,
+              }),
+            );
+
             console.log(res);
             Alert.alert('Pemberitahuan', 'Registration Berhasil', [
               {

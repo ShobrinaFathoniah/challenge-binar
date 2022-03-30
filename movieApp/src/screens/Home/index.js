@@ -22,13 +22,20 @@ import React, {useState, useEffect} from 'react';
 import NetInfo from '@react-native-community/netinfo';
 import axios from 'axios';
 import style from './style';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLatest, setRecommended} from './redux/action';
 
 const Home = ({navigation}) => {
-  const [listRecommended, setListRecommended] = useState([]);
-  const [listLatest, setListLatest] = useState([]);
+  // const [listRecommended, setListRecommended] = useState([]);
+  // const [listLatest, setListLatest] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [connection, setConnection] = useState(true);
+
+  //dispatch
+  const dispatch = useDispatch();
+
+  const {listRecommended, listLatest} = useSelector(state => state.home);
 
   useEffect(() => {
     getMovies();
@@ -77,8 +84,10 @@ const Home = ({navigation}) => {
     try {
       const results = await axios.get(`${BASE_URL}/movies`);
       console.log(results);
-      setListRecommended(results.data.results);
-      setListLatest(results.data.results);
+
+      dispatch(setRecommended(results.data.results));
+      dispatch(setLatest(results.data.results));
+
       setIsLoading(false);
       setRefreshing(false);
     } catch (error) {

@@ -24,13 +24,21 @@ import {
 import {BASE_URL_STORE} from '@env';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {LoginPic} from '../../assets';
+import {useDispatch, useSelector} from 'react-redux';
+import {setUsername, setPassword} from './redux/action';
 
 const Login = ({navigation}) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [connection, setConnection] = useState(true);
+
+  //dispatch
+  const dispatch = useDispatch();
+
+  const {username, password} = useSelector(state => state.login);
 
   const dataUser = {
     username: username, //mor_2314
@@ -103,14 +111,14 @@ const Login = ({navigation}) => {
         <SafeAreaView style={styles.containerInput}>
           <TextInput
             style={styles.input}
-            onChangeText={value => setUsername(value)}
+            onChangeText={value => dispatch(setUsername(value))}
             value={username}
             placeholder="Username"
             placeholderTextColor={MAIN_COLOR}
           />
           <TextInput
             style={styles.input}
-            onChangeText={value => setPassword(value)}
+            onChangeText={value => dispatch(setPassword(value))}
             value={password}
             placeholder="Password"
             placeholderTextColor={MAIN_COLOR}
