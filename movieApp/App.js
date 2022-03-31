@@ -4,6 +4,7 @@ import SplashScreen from 'react-native-splash-screen';
 import Router from './src/routers';
 import {Provider} from 'react-redux';
 import {store} from './src/store';
+import Root from './src/routers';
 
 const App = () => {
   useEffect(() => {
@@ -12,9 +13,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Router />
-      </NavigationContainer>
+      <Root />
     </Provider>
   );
 };

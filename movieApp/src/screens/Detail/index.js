@@ -34,6 +34,11 @@ import {
   setArtist,
   setLengthCastArtist,
 } from './redux/action';
+import {
+  setRefreshing,
+  setConnection,
+  setIsLoading,
+} from '../../store/globalAction';
 
 const Detail = ({route, navigation}) => {
   const {params} = route.params;
@@ -42,20 +47,23 @@ const Detail = ({route, navigation}) => {
   // const [detailMovie, setDetailMovie] = useState({});
   // const [listGenre, setListGenre] = useState([]);
   // const [listArtist, setListArtist] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [end, setEnd] = useState(6);
   // const [lengthCastArtist, setLengthCastArtist] = useState(0);
-  const [connection, setConnection] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
+  // const [connection, setConnection] = useState(true);
+  // const [refreshing, setRefreshing] = useState(false);
 
   //dispatch
   const dispatch = useDispatch();
   const {detailMovie, listGenre, listArtist, lengthCastArtist} = useSelector(
     state => state.detail,
   );
+  const {refreshing, isLoading, connection} = useSelector(
+    state => state.global,
+  );
 
   const onRefresh = () => {
-    setRefreshing(true);
+    dispatch(setRefreshing(true));
     getDetailMovie();
   };
 
@@ -64,12 +72,12 @@ const Detail = ({route, navigation}) => {
       console.log('Connection type', state.type);
       console.log('Is connected?', state.isConnected);
 
-      setConnection(state.isConnected);
+      dispatch(setConnection(state.isConnected));
     });
   };
 
   const getDetailMovie = async () => {
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
     internetChecker();
 
     try {
@@ -84,14 +92,14 @@ const Detail = ({route, navigation}) => {
       dispatch(setArtist(res.data.credits.cast));
       dispatch(setLengthCastArtist(res.data.credits.cast.length));
 
-      setIsLoading(false);
-      setRefreshing(false);
+      dispatch(setIsLoading(false));
+      dispatch(setRefreshing(false));
     } catch (error) {
-      setIsLoading(false);
+      dispatch(setIsLoading(false));
 
       console.log(error);
       console.log(idMovie);
-      setRefreshing(false);
+      dispatch(setRefreshing(false));
     }
   };
 

@@ -1,6 +1,6 @@
 const initialState = {
-  username: '',
-  password: '',
+  dataUsername: '',
+  dataPassword: '',
 };
 
 export const loginReducer = (state = initialState, action) => {
@@ -8,13 +8,13 @@ export const loginReducer = (state = initialState, action) => {
     case 'SET_USERNAME':
       return {
         ...state,
-        username: action.payload,
+        dataUsername: action.payload,
       };
 
     case 'SET_PASSWORD':
       return {
         ...state,
-        password: action.payload,
+        dataPassword: action.payload,
       };
 
     default:

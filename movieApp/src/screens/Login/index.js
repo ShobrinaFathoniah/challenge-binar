@@ -25,20 +25,31 @@ import {BASE_URL_STORE} from '@env';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {LoginPic} from '../../assets';
 import {useDispatch, useSelector} from 'react-redux';
-import {setUsername, setPassword} from './redux/action';
+import {setDataUsername, setDataPassword} from './redux/action';
+import {
+  setConnection,
+  setIsLoading,
+  setRefreshing,
+} from '../../store/globalAction';
 
 const Login = ({navigation}) => {
-  // const [username, setUsername] = useState('');
-  // const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
-  const [connection, setConnection] = useState(true);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [refreshing, setRefreshing] = useState(false);
+  // const [connection, setConnection] = useState(true);
 
   //dispatch
   const dispatch = useDispatch();
+  const {dataUsername, dataPassword} = useSelector(state => state.login);
+  const {refreshing, isLoading, connection} = useSelector(
+    state => state.global,
+  );
 
-  const {username, password} = useSelector(state => state.login);
+  if (dataUsername && dataPassword) {
+    navigation.navigate('Home');
+  }
 
   const dataUser = {
     username: username, //mor_2314
@@ -46,8 +57,8 @@ const Login = ({navigation}) => {
   };
 
   const onRefresh = () => {
-    setRefreshing(true);
-    internetChecker();
+    dispatch(setRefreshing(true));
+    internetChecker(); //taro di rooot js navigation container
   };
 
   const internetChecker = () => {
@@ -55,13 +66,13 @@ const Login = ({navigation}) => {
       console.log('Connection type', state.type);
       console.log('Is connected?', state.isConnected);
 
-      setConnection(state.isConnected);
-      setRefreshing(false);
+      dispatch(setConnection(state.isConnected));
+      dispatch(setRefreshing(false));
     });
   };
 
   const login = async () => {
-    setIsLoading(true);
+    dispatch(setIsLoading(true));
 
     try {
       if (username && password) {
@@ -76,28 +87,30 @@ const Login = ({navigation}) => {
                   onPress: () => navigation.navigate('Home'),
                 },
               ]);
-              setIsLoading(false);
+              dispatch(setDataUsername(username));
+              dispatch(setDataPassword(password));
+              dispatch(setIsLoading(false));
             } else if (status === 401) {
               Alert.alert(
                 'Pemberitahuan',
                 'Error: Salah Username atau Password',
               );
-              setIsLoading(false);
+              dispatch(setIsLoading(false));
             } else if (status > 500) {
               Alert.alert('Pemberitahuan', 'Error: Server');
-              setIsLoading(false);
+              dispatch(setIsLoading(false));
             }
           },
         });
 
-        console.log(res);
+        console.log(res, 'res');
       } else {
         Alert.alert('Pemberitahuan', 'Error: Semua Field Wajib diisi');
-        setIsLoading(false);
+        dispatch(setIsLoading(false));
       }
     } catch (error) {
-      setIsLoading(false);
-      console.log(error);
+      dispatch(setIsLoading(false));
+      console.log(error, 'error');
       //Alert.alert('Pemberitahuan', `Error: Login Gagal karena ${error}`)
     }
   };
@@ -111,14 +124,14 @@ const Login = ({navigation}) => {
         <SafeAreaView style={styles.containerInput}>
           <TextInput
             style={styles.input}
-            onChangeText={value => dispatch(setUsername(value))}
+            onChangeText={value => setUsername(value)}
             value={username}
             placeholder="Username"
             placeholderTextColor={MAIN_COLOR}
           />
           <TextInput
             style={styles.input}
-            onChangeText={value => dispatch(setPassword(value))}
+            onChangeText={value => setPassword(value)}
             value={password}
             placeholder="Password"
             placeholderTextColor={MAIN_COLOR}

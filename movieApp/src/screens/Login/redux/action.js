@@ -1,11 +1,11 @@
-export const setUsername = data => {
+export const setDataUsername = data => {
   return {
     type: 'SET_USERNAME',
     payload: data,
   };
 };
 
-export const setPassword = data => {
+export const setDataPassword = data => {
   return {
     type: 'SET_PASSWORD',
     payload: data,

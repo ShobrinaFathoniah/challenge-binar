@@ -8,7 +8,7 @@ import {
   Alert,
   BackHandler,
 } from 'react-native';
-import {PRIMARY_DARK} from '../../utils/colors';
+import {PRIMARY_DARK, WHITE} from '../../utils/colors';
 import {
   Amita,
   LibreBaskerville,
@@ -24,6 +24,8 @@ import axios from 'axios';
 import style from './style';
 import {useDispatch, useSelector} from 'react-redux';
 import {setLatest, setRecommended} from './redux/action';
+import {moderateScale} from 'react-native-size-matters';
+import {setDataPassword, setDataUsername} from '../Login/redux/action';
 
 const Home = ({navigation}) => {
   // const [listRecommended, setListRecommended] = useState([]);
@@ -206,7 +208,40 @@ const Home = ({navigation}) => {
       <StatusBar barStyle="light-content" backgroundColor={PRIMARY_DARK} />
 
       {/* Judul Apps */}
-      <Amita style={style.appName}>Livies</Amita>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingLeft: 20,
+          paddingRight: 20,
+        }}>
+        <Amita style={style.appName}>Livies</Amita>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(setDataUsername(''));
+            dispatch(setDataPassword(''));
+            navigation.navigate('Login');
+          }}>
+          <LibreBaskerville
+            style={{
+              padding: 5,
+              backgroundColor: 'white',
+              color: 'black',
+              borderRadius: 4,
+            }}>
+            Logout
+          </LibreBaskerville>
+        </TouchableOpacity>
+      </View>
+      {/* <LibreBaskerville
+        style={{
+          color: WHITE,
+          fontSize: moderateScale(16),
+          marginStart: moderateScale(10),
+        }}>
+        Selamat Datang, {name}
+      </LibreBaskerville> */}
 
       {connection ? tampilan() : NoConnection(connection)}
     </ScrollView>
