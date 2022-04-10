@@ -148,7 +148,7 @@ const Login = ({navigation}) => {
         {/* registrasi */}
         <SafeAreaView style={styles.texts}>
           <LibreBaskerville style={styles.text}>
-            Not Have an Account?{' '}
+            Not Have an Account?
           </LibreBaskerville>
           <TouchableOpacity onPress={() => navigation.navigate('Registrasi')}>
             <LibreBaskerville style={[styles.text, styles.textRegis]}>
